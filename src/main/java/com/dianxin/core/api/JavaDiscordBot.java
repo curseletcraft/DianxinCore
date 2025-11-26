@@ -1,7 +1,6 @@
 package com.dianxin.core.api;
 
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
-import com.dianxin.core.api.utils.quicksetup.IntentContext;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -50,7 +49,7 @@ import java.util.EnumSet;
  *
  *     @Override
  *     protected EnumSet<GatewayIntent> getIntents() {
- *         return JavaDiscordBot.getDefaultIntents();
+ *         return IntentContext.getDefaultIntents();
  *     }
  *
  *     @Override
@@ -181,43 +180,7 @@ public abstract class JavaDiscordBot {
     protected Activity getActivity() {
         return null;
     }
-    /**
-     * @return All gateway intents Discord provides.
-     * @deprecated Use {@link IntentContext#getAllIntents()} instead.
-     */
-    @Deprecated
-    public static EnumSet<GatewayIntent> getAllIntents() {
-        return EnumSet.allOf(GatewayIntent.class);
-    }
 
-    /**
-     * @return Recommended default intents for most bots.
-     * @deprecated Use {@link IntentContext#getDefaultIntents()} instead.
-     */
-    @Deprecated
-    public static EnumSet<GatewayIntent> getDefaultIntents() {
-        return EnumSet.of(
-                GatewayIntent.GUILD_MEMBERS,
-                GatewayIntent.GUILD_MODERATION,
-                GatewayIntent.GUILD_EXPRESSIONS,
-                GatewayIntent.GUILD_WEBHOOKS,
-                GatewayIntent.GUILD_INVITES,
-                GatewayIntent.GUILD_VOICE_STATES,
-                GatewayIntent.GUILD_PRESENCES,
-                GatewayIntent.GUILD_MESSAGES,
-                GatewayIntent.GUILD_MESSAGE_REACTIONS,
-                GatewayIntent.GUILD_MESSAGE_TYPING,
-                GatewayIntent.DIRECT_MESSAGES,
-                GatewayIntent.DIRECT_MESSAGE_REACTIONS,
-                GatewayIntent.DIRECT_MESSAGE_TYPING,
-                GatewayIntent.MESSAGE_CONTENT,
-                GatewayIntent.SCHEDULED_EVENTS,
-                GatewayIntent.AUTO_MODERATION_CONFIGURATION,
-                GatewayIntent.AUTO_MODERATION_EXECUTION,
-                GatewayIntent.GUILD_MESSAGE_POLLS,
-                GatewayIntent.DIRECT_MESSAGE_POLLS
-        );
-    }
     /**
      * Override this to register custom console commands using {@link ConsoleCommandManager}.
      */

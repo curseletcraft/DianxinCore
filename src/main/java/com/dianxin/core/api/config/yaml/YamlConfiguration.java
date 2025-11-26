@@ -1,11 +1,13 @@
 package com.dianxin.core.api.config.yaml;
 
+import org.jetbrains.annotations.ApiStatus;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.DumperOptions;
 
 import java.io.*;
 import java.util.*;
 
+@ApiStatus.Experimental
 public class YamlConfiguration extends MemoryConfiguration implements FileConfiguration {
 
     private final Yaml yaml;
