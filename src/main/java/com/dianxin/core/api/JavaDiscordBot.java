@@ -1,5 +1,6 @@
 package com.dianxin.core.api;
 
+import com.dianxin.core.api.handler.console.ConsoleCommandManager;
 import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -18,6 +19,8 @@ public abstract class JavaDiscordBot {
     @Getter private JDA jda;
     @Getter private final @NotNull String botName;
     @Getter private final Logger logger;
+
+    @Getter private final ConsoleCommandManager consoleManager = new ConsoleCommandManager();
 
     private final String botToken;
 
@@ -50,6 +53,12 @@ public abstract class JavaDiscordBot {
 
         logger.info("✅ Bot {} đã khởi động thành công.", botName);
         logger.info("Link mời bot: {}", jda.getInviteUrl());
+
+        // Đăng ký lệnh console custom
+        registerConsoleCommands();
+
+        // Bắt đầu lắng nghe console
+        consoleManager.startListening(this);
 
         onEnable();
     }
@@ -100,5 +109,9 @@ public abstract class JavaDiscordBot {
                 GatewayIntent.GUILD_MESSAGE_POLLS,
                 GatewayIntent.DIRECT_MESSAGE_POLLS
         );
+    }
+
+    protected void registerConsoleCommands() {
+        // Bot con override
     }
 }
