@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("unused")
 public class ActivityContext {
     private static final Logger logger = LoggerFactory.getLogger(ActivityContext.class);
 

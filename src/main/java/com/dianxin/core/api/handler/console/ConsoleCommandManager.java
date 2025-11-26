@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
+@SuppressWarnings("unused")
 public class ConsoleCommandManager {
 
     private final Map<String, AbstractConsoleCommand> commands = new HashMap<>();

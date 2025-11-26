@@ -1,7 +1,10 @@
 package com.dianxin.core.api.config.yaml;
 
+import org.jetbrains.annotations.ApiStatus;
+
 import java.util.*;
 
+@ApiStatus.Experimental
 @SuppressWarnings({"unused"})
 public class MemorySection {
 

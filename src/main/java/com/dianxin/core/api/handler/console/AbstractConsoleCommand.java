@@ -3,6 +3,7 @@ package com.dianxin.core.api.handler.console;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("unused")
 public abstract class AbstractConsoleCommand {
     private final Logger logger;
     private final String commandLine;

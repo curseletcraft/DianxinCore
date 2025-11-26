@@ -2,6 +2,7 @@ package com.dianxin.core.api.config.env;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
+@SuppressWarnings("unused")
 public class VirtualEnvironmentConfiguration {
     private static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
 

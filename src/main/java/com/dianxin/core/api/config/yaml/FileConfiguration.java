@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 @ApiStatus.Internal
+@ApiStatus.Experimental
 public interface FileConfiguration {
     void saveDefaultConfig();
 
