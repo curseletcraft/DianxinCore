@@ -9,72 +9,88 @@ import java.util.*;
 public class YamlConfiguration extends MemoryConfiguration implements FileConfiguration {
 
     private final Yaml yaml;
-    private String defaultResourceName;
-
     private File file;
+    private final String defaultResourceName;
 
-    public YamlConfiguration() {
+    // Constructor chính
+    public YamlConfiguration(String defaultResourceName, String filePath) {
+        this(defaultResourceName);
+        this.file = new File(filePath);
+    }
+
+    // Constructor default
+    public YamlConfiguration(String defaultResourceName) {
         DumperOptions options = new DumperOptions();
         options.setIndent(2);
         options.setPrettyFlow(true);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         this.yaml = new Yaml(options);
-    }
-
-    public YamlConfiguration(String defaultResourceName) {
-        this();
         this.defaultResourceName = defaultResourceName;
     }
 
-    // LOAD
+    // Constructor rỗng
+    public YamlConfiguration() {
+        this(null);
+    }
+
     @Override
     public void load(File file) throws IOException {
         this.file = file;
 
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            createEmpty(file);
             return;
         }
 
         try (InputStream input = new FileInputStream(file)) {
             Object loaded = yaml.load(input);
-
-            if (loaded instanceof Map<?, ?> map)
-                this.map = convertToMap(map);
+            if (loaded instanceof Map<?, ?> map) {
+                this.map = convert(map);
+            }
         }
     }
 
     @Override
-    public void load(String file) throws IOException {
-        load(new File(file));
+    public void load(String path) throws IOException {
+        load(new File(path));
+    }
+
+    private void createEmpty(File file) throws IOException {
+        File parent = file.getParentFile();
+        if (parent != null && !parent.exists()) parent.mkdirs();
+
+        file.createNewFile();
+        this.map = new LinkedHashMap<>();
     }
 
     @Override
     public void saveDefaultConfig() {
-        if (file == null) {
-            throw new IllegalStateException("No config file specified.");
-        }
 
-        if (file.exists()) return;
+        if (file == null)
+            throw new IllegalStateException("No file path assigned for config.");
+
+        if (file.exists()) return; // Đã có → bỏ qua
+
+        if (defaultResourceName == null)
+            throw new IllegalStateException("Default resource name is null.");
 
         try (InputStream input = getClass().getClassLoader().getResourceAsStream(defaultResourceName)) {
-            if (input == null) {
-                throw new RuntimeException("Default resource not found: " + defaultResourceName);
-            }
 
-            file.getParentFile().mkdirs();
+            if (input == null)
+                throw new RuntimeException("Default resource not found: " + defaultResourceName);
+
+            File parent = file.getParentFile();
+            if (parent != null) parent.mkdirs();
 
             try (OutputStream output = new FileOutputStream(file)) {
                 input.transferTo(output);
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to save default config: " + file.getName(), e);
         }
     }
 
-    // SAVE
     @Override
     public void save(File file) throws IOException {
         try (Writer writer = new FileWriter(file)) {
@@ -83,40 +99,43 @@ public class YamlConfiguration extends MemoryConfiguration implements FileConfig
     }
 
     @Override
-    public void save(String file) throws IOException {
-        save(new File(file));
+    public void save(String path) throws IOException {
+        save(new File(path));
     }
 
     @Override
     public void saveConfig() {
+        if (file == null) return;
         try {
-            if (file != null) save(file);
+            save(file);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to save config: " + file.getName(), e);
         }
     }
 
     @Override
     public void reloadConfig() {
+        if (file == null) return;
         try {
-            if (file != null) load(file);
+            load(file);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to reload config: " + file.getName(), e);
         }
     }
 
-    private Map<String, Object> convertToMap(Map<?, ?> input) {
+    private Map<String, Object> convert(Map<?, ?> input) {
         Map<String, Object> result = new LinkedHashMap<>();
 
-        input.forEach((k, v) -> {
-            String key = String.valueOf(k);
+        for (Map.Entry<?, ?> e : input.entrySet()) {
+            String key = Objects.toString(e.getKey());
+            Object value = e.getValue();
 
-            if (v instanceof Map<?, ?> child) {
-                result.put(key, convertToMap(child));
+            if (value instanceof Map<?, ?> child) {
+                result.put(key, convert(child));
             } else {
-                result.put(key, v);
+                result.put(key, value);
             }
-        });
+        }
 
         return result;
     }
