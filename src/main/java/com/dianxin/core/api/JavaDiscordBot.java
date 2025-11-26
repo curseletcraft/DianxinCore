@@ -163,6 +163,13 @@ public abstract class JavaDiscordBot {
         onDisable();
         logger.info("⏹ Đang tắt bot {}...", botName);
         jda.getPresence().setStatus(OnlineStatus.OFFLINE);
+
+        /*
+         * Shutdown các task khác ngoại trừ bot.onShutdown()
+         * Xem {@link InternalServer#shutdown()}
+         */
+        DianxinCore.getServer().getScheduler().shutdown();
+
         jda.shutdown();
     }
 
