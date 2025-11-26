@@ -128,6 +128,9 @@ public abstract class JavaDiscordBot {
                 .build()
                 .awaitReady();
 
+        // Init static core
+        DianxinCore.setServer(new InternalServer(this));
+
         logger.info("✅ Bot {} đã khởi động thành công.", botName);
         logger.info("Link mời bot: {}", jda.getInviteUrl());
 
