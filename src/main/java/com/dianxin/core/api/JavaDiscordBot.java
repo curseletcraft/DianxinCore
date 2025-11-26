@@ -1,6 +1,7 @@
 package com.dianxin.core.api;
 
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
+import com.dianxin.core.api.utils.quicksetup.IntentContext;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -182,14 +183,18 @@ public abstract class JavaDiscordBot {
     }
     /**
      * @return All gateway intents Discord provides.
+     * @deprecated Use {@link IntentContext#getAllIntents()} instead.
      */
+    @Deprecated
     public static EnumSet<GatewayIntent> getAllIntents() {
         return EnumSet.allOf(GatewayIntent.class);
     }
 
     /**
      * @return Recommended default intents for most bots.
+     * @deprecated Use {@link IntentContext#getDefaultIntents()} instead.
      */
+    @Deprecated
     public static EnumSet<GatewayIntent> getDefaultIntents() {
         return EnumSet.of(
                 GatewayIntent.GUILD_MEMBERS,
