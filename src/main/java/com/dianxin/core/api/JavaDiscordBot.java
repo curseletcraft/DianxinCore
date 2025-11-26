@@ -16,9 +16,6 @@ import java.util.EnumSet;
 
 @SuppressWarnings("unused")
 public abstract class JavaDiscordBot {
-    @Getter private JDA jda;
-    @Getter private final @NotNull String botName;
-    @Getter private final Logger logger;
 
     @Getter private final ConsoleCommandManager consoleManager = new ConsoleCommandManager();
 
@@ -113,5 +110,33 @@ public abstract class JavaDiscordBot {
 
     protected void registerConsoleCommands() {
         // Bot con override
+    }
+
+    /**
+     * @return The active JDA instance.
+     */
+    public JDA getJda() {
+        return jda;
+    }
+
+    /**
+     * @return The friendly name of the bot.
+     */
+    public @NotNull String getBotName() {
+        return botName;
+    }
+
+    /**
+     * @return Logger instance of the bot.
+     */
+    public Logger getLogger() {
+        return logger;
+    }
+
+    /**
+     * @return The console command manager.
+     */
+    public ConsoleCommandManager getConsoleManager() {
+        return consoleManager;
     }
 }
