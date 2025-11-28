@@ -25,7 +25,7 @@ Với maven:
   <dependency>
     <groupId>com.github.CurseletCraft</groupId>
     <artifactId>DianxinCore</artifactId>
-    <version>v1.0.2</version>
+    <version>v1.0.5</version>
   </dependency>
 ```
 ```xml
