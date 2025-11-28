@@ -1,6 +1,5 @@
 package com.dianxin.core.api.commands;
 
-import com.dianxin.core.api.JavaDiscordBot;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -46,13 +45,10 @@ import java.util.Collections;
  * }
  * }</pre>
  *
- * @param <T> Loại bot kế thừa từ {@link JavaDiscordBot}
  */
 @SuppressWarnings("unused")
 @ApiStatus.Experimental
-public abstract class BaseCommand<T extends JavaDiscordBot> {
-    /** Tham chiếu đến bot hiện tại */
-    private final T bot;
+public abstract class BaseCommand extends SimpleCommand {
 
     /** Logger riêng cho từng command */
     private final Logger logger;
@@ -69,13 +65,11 @@ public abstract class BaseCommand<T extends JavaDiscordBot> {
     /**
      * Khởi tạo BaseCommand.
      *
-     * @param bot Bot chính đang sử dụng command
      * @param defer Có tự động defer reply trước khi thực thi không
      * @param guildOnly Có chỉ cho phép chạy trong guild không
      * @param debugEnabled Có bật debug log không
      */
-    public BaseCommand(T bot, boolean defer, boolean guildOnly, boolean debugEnabled) {
-        this.bot = bot;
+    public BaseCommand(boolean defer, boolean guildOnly, boolean debugEnabled) {
         this.logger = LoggerFactory.getLogger(this.getClass());
         this.defer = defer;
         this.guildOnly = guildOnly;
@@ -185,12 +179,5 @@ public abstract class BaseCommand<T extends JavaDiscordBot> {
      */
     protected Logger getLogger() {
         return logger;
-    }
-
-    /**
-     * @return Bot chính đang được command này sử dụng
-     */
-    protected T getBot() {
-        return bot;
     }
 }
