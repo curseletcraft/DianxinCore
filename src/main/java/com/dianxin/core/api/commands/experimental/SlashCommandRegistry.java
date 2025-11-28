@@ -1,6 +1,7 @@
-package com.dianxin.core.api.experimental;
+package com.dianxin.core.api.commands.experimental;
 
 import com.dianxin.core.api.JavaDiscordBot;
+import com.dianxin.core.api.commands.BaseCommand;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.ApiStatus;
