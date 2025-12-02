@@ -22,7 +22,7 @@ public class VirtualEnvironmentConfiguration {
     public static String getOrThrow(String key) {
         String value = get(key);
         if (value == null) {
-            throw new IllegalStateException("Missing environment variable: " + key);
+            throw new EnvVariableNotFoundException(key);
         }
         return value;
     }
