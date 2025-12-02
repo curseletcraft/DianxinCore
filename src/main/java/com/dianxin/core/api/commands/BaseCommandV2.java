@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class BaseCommandV2 extends SimpleCommand {
+public abstract class BaseCommandV2 {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public final void handle(SlashCommandInteractionEvent event) {
