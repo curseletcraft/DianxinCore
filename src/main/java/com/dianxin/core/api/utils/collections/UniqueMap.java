@@ -1,5 +1,7 @@
 package com.dianxin.core.api.utils.collections;
 
+import java.util.Map;
+
 public interface UniqueMap<K, V> {
     void putUnique(K key, V value);
 
@@ -16,5 +18,7 @@ public interface UniqueMap<K, V> {
     void removeByValue(V value);
 
     int size();
+
+    Map<K, V> getAll();
 }
 
