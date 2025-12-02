@@ -12,7 +12,9 @@ public final class DianxinCore {
     @ApiStatus.Internal // chỉ framework được gọi
     static void setServer(Server serverInstance) {
         if (server != null) {
-            throw new IllegalStateException("DianxinCore Server đã được khởi tạo!");
+            throw new IllegalStateException("DianxinCore Server đã được khởi tạo! " +
+                    "Nếu bạn đang mở 2 bot trong cùng 1 file jar, " +
+                    "khuyến khích sử dụng @NoInternalInstance annotation.");
         }
         server = serverInstance;
     }

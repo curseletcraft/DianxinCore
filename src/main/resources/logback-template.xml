@@ -1,0 +1,44 @@
+<configuration>
+
+    <property name="LOG_DIR" value="logs" />
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n" />
+
+    <!-- Console output -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Rolling file output: 1 file/ngày -->
+    <appender name="DAILY_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- File hiện tại đang ghi sẽ là file mới nhất -->
+        <file>${LOG_DIR}/log-latest.log</file>
+
+        <!-- Sau mỗi ngày, rename file hiện tại sang log-yyyy-MM-dd.log -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory> <!-- giữ lại 30 ngày gần nhất -->
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Default log level and appenders -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_LOG" />
+    </root>
+
+    <!-- Optional: specific package -->
+    <logger name="${BASE_PACKAGE}" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_LOG" />
+    </logger>
+
+</configuration>
