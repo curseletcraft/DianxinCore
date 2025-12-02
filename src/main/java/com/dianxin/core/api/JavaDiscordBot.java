@@ -1,5 +1,6 @@
 package com.dianxin.core.api;
 
+import com.dianxin.core.api.annotations.core.NoInternalInstance;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -129,7 +130,10 @@ public abstract class JavaDiscordBot {
                 .awaitReady();
 
         // Init static core
-        DianxinCore.setServer(new InternalServer(this));
+        // nếu có annotation @NoInternalInstance thì bỏ qua dòng này
+        if(!this.getClass().isAnnotationPresent(NoInternalInstance.class)) {
+            DianxinCore.setServer(new InternalServer(this));
+        }
 
         logger.info("✅ Bot {} đã khởi động thành công.", botName);
         logger.info("Link mời bot: {}", jda.getInviteUrl());
