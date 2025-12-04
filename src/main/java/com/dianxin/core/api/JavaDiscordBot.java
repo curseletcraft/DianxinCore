@@ -174,6 +174,7 @@ public abstract class JavaDiscordBot {
     /**
      * Called when the bot fully starts and is ready.
      * Override to initialize listeners, commands, database, etc.
+     * @deprecated Use @OnEnable annotation instead
      */
     @Deprecated
     public void onEnable() { }
@@ -181,6 +182,7 @@ public abstract class JavaDiscordBot {
     /**
      * Called before the bot shuts down.
      * Override to close resources or save data.
+     * @deprecated Use @OnDisable annotation instead
      */
     @Deprecated
     public void onDisable() { }

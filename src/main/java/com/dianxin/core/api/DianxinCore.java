@@ -35,6 +35,7 @@ public final class DianxinCore {
         }
     }
 
+    @ApiStatus.Experimental
     public static Scheduler getScheduler() {
         checkInit();
         return server.getScheduler();

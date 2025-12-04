@@ -1,7 +1,10 @@
 package com.dianxin.core.api;
 
+import org.jetbrains.annotations.ApiStatus;
+
 import java.util.concurrent.TimeUnit;
 
+@ApiStatus.Experimental
 public interface Scheduler {
 
     /**
