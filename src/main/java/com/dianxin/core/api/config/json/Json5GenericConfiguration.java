@@ -18,7 +18,6 @@ import java.nio.file.Files;
  */
 @SuppressWarnings({"ResultOfMethodCallIgnored"})
 public class Json5GenericConfiguration<T extends AbstractBotConfiguration> {
-
     private final Logger logger = LoggerFactory.getLogger(Json5GenericConfiguration.class);
 
     private T botConfig;
