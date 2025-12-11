@@ -25,7 +25,14 @@ Với maven:
   <dependency>
     <groupId>com.github.CurseletCraft</groupId>
     <artifactId>DianxinCore</artifactId>
-    <version>1.0.14.1</version>
+    <version>1.0.14.4</version>
+  </dependency>
+        
+  <!-- https://mvnrepository.com/artifact/net.dv8tion/JDA -->
+  <dependency>
+    <groupId>net.dv8tion</groupId>
+    <artifactId>JDA</artifactId>
+    <version>6.1.3</version>
   </dependency>
 ```
 ```xml
