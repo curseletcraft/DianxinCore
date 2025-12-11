@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.build.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -94,7 +95,6 @@ public abstract class BaseCommandV2 {
 
         /* ✅ Bot permissions */
         RequireSelfPermissions rsp = clazz.getAnnotation(RequireSelfPermissions.class);
-
         if (rsp != null) {
             Member self = guild.getSelfMember();
             for (Permission p : rsp.value()) {
