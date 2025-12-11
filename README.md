@@ -45,7 +45,7 @@ Với maven:
 Với gradle:
 ```groovy
 dependencies {
-    implementation 'com.github.CurseletCraft:DianxinCore:002c5ad20b'
+    implementation 'com.github.CurseletCraft:DianxinCore:1.0.14.4'
 }
 
 repositories {
