@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <h2>BaseCommand</h2>
+ * <h2>BaseCommandV2</h2>
  *
  * Lớp cơ sở cho tất cả các Slash Command trong hệ thống bot.
  * <p>
@@ -30,9 +30,8 @@ import org.slf4j.LoggerFactory;
  * @GuildOnly
  * @RequirePermissions(value = Permission.MESSAGE_SEND)
  * @RequireSelfPermissions(...)
- * public class PingCommand extends BaseCommand<MyBot> {
+ * public class PingCommand extends BaseCommandV2 {
  *     public PingCommand(MyBot bot) {
- *         super(bot, true, false, true);
  *     }
  *
  *     @Override
