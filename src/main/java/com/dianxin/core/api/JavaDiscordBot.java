@@ -8,6 +8,7 @@ import com.dianxin.core.api.annotations.core.OnDisable;
 import com.dianxin.core.api.annotations.core.OnEnable;
 import com.dianxin.core.api.annotations.core.UsingLikeBukkitLogback;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
+import com.dianxin.core.api.meta.BotMeta;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -89,6 +90,11 @@ public abstract class JavaDiscordBot {
     private final @NotNull String botName;
 
     /**
+     * Meta of bot
+     */
+    private final @NotNull BotMeta meta;
+
+    /**
      * Logger instance for this bot class.
      */
     private final Logger logger;
@@ -109,12 +115,14 @@ public abstract class JavaDiscordBot {
      * Creates a new Discord bot instance.
      *
      * @param token   The bot token from Discord Developer Portal.
-     * @param botName Name used for logging and display.
+     * @param meta    Meta bot.
      */
-    public JavaDiscordBot(String token, @NotNull String botName) {
+    public JavaDiscordBot(String token, @NotNull BotMeta meta) {
         trySetupBukkitLikeLogback();
         this.botToken = token;
-        this.botName = botName;
+
+        this.meta = meta;
+        this.botName = meta.getBotName();
         this.logger = LoggerFactory.getLogger(this.getClass());
     }
 
@@ -243,6 +251,13 @@ public abstract class JavaDiscordBot {
      */
     public @NotNull String getBotName() {
         return botName;
+    }
+
+    /**
+     * @return Meta of the bot
+     */
+    public @NotNull BotMeta getMeta() {
+        return meta;
     }
 
     /**
