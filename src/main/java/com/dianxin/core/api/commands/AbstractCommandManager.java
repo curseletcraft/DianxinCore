@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.jetbrains.annotations.NotNull;
 
+@Deprecated
 public abstract class AbstractCommandManager<T extends JavaDiscordBot> extends ListenerAdapter {
     private final T bot;
 
