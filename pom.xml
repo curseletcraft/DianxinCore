@@ -4,7 +4,7 @@
 
     <groupId>com.dianxin.core</groupId>
     <artifactId>DianxinCore</artifactId>
-    <version>1.0.14.4</version>
+    <version>1.0.15.2</version>
     <packaging>jar</packaging>
 
     <name>DianxinCore</name>
