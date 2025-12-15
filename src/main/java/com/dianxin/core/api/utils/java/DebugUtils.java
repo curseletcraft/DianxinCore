@@ -42,7 +42,7 @@ import java.util.Map;
  * }
  */
 @ApiStatus.Experimental
-public class DebugUtils {
+public final class DebugUtils {
     private static final Logger logger = LoggerFactory.getLogger(DebugUtils.class);
 
     /**

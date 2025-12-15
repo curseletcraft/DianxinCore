@@ -3,8 +3,12 @@ package com.dianxin.core.api.utils.java;
 import java.awt.Color;
 import java.util.Random;
 
-public class ColorUtil {
+public final class ColorUtil {
     private static final Random RANDOM = new Random();
+
+    private ColorUtil() {
+        throw new UnsupportedOperationException(ColorUtil.class.getName() + " utility class cannot be initialized!");
+    }
 
     /**
      * Tạo một màu ngẫu nhiên hoàn toàn.

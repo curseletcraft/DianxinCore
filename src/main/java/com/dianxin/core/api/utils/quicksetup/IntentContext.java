@@ -5,7 +5,11 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import java.util.EnumSet;
 
 @SuppressWarnings("unused")
-public class IntentContext {
+public final class IntentContext {
+    private IntentContext() {
+        throw new UnsupportedOperationException(IntentContext.class.getName() + " utility class cannot be initialized!");
+    }
+
     public static EnumSet<GatewayIntent> getAllIntents() {
         return EnumSet.allOf(GatewayIntent.class);
     }

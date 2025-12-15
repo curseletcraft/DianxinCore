@@ -1,5 +1,6 @@
 package com.dianxin.core.api.utils.quicksetup;
 
+import com.dianxin.core.api.utils.java.ColorUtil;
 import net.dv8tion.jda.api.entities.Activity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -7,8 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("unused")
-public class ActivityContext {
+public final class ActivityContext {
     private static final Logger logger = LoggerFactory.getLogger(ActivityContext.class);
+
+    private ActivityContext() {
+        throw new UnsupportedOperationException(ActivityContext.class.getName() + " utility class cannot be initialized!");
+    }
 
     @Nullable
     public static Activity parseActivity(@Nullable String rawType, @NotNull String context, @Nullable String url) {
