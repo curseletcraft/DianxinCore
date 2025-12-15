@@ -5,6 +5,7 @@ import com.dianxin.core.api.JavaDiscordBot;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,31 +20,32 @@ public class CommandHandler extends ListenerAdapter {
     private final Logger logger = LoggerFactory.getLogger(CommandHandler.class);
 
     public CommandHandler() {
-        this.jda = DianxinCore.getJda();
+        this(DianxinCore.getJda());
     }
 
     public CommandHandler(JDA jda) {
         this.jda = jda;
+        this.jda.addEventListener(this);
     }
 
     public <T extends JavaDiscordBot> CommandHandler(T bot) {
-        this.jda = bot.getJda();
+        this(bot.getJda());
     }
 
     public void register(BaseCommandV3... cmds) {
+        CommandListUpdateAction action = jda.updateCommands();
         for(BaseCommandV3 cmd : cmds) {
             String cmdName = cmd.getClass().getSimpleName();
             commands.put(cmdName, cmd); // ??
             logger.info("✅ Registered command /{}", cmdName);
+            action = action.addCommands(cmd.buildCommandData());
         }
+        action.queue();
     }
 
-    public void handle(SlashCommandInteractionEvent event) {
+    @Override
+    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         BaseCommandV3 cmd = commands.get(event.getName() + "Command");
         if(cmd != null) cmd.handle(event); // ?
-    }
-
-    public void registerAllCommandsToJDA() {
-
     }
 }
