@@ -163,7 +163,7 @@ public abstract class JavaDiscordBot {
         // Init static core
         // nếu có annotation @NoInternalInstance thì bỏ qua dòng này
         if(!this.getClass().isAnnotationPresent(NoInternalInstance.class)) {
-            DianxinCore.setServer(new InternalServer(this));
+            DianxinCore.setServer(new InternalServer(this), meta);
         }
 
         logger.info("✅ Bot {} đã khởi động thành công.", botName);
