@@ -3,6 +3,7 @@ package com.dianxin.core.api.utils.collections;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class BiUniqueMap<K, V> implements UniqueMap<K, V> {
     private final Map<K, V> keyToValue = new HashMap<>();
     private final Map<V, K> valueToKey = new HashMap<>();

@@ -9,15 +9,16 @@ public final class DianxinCore {
 
     private static Server server;
     private static BotMeta meta;
+    private static final String ALREADY_INITIALIZED = "DianxinCore Server đã được khởi tạo! " +
+            "Nếu bạn đang mở 2 bot trong cùng 1 file jar, " +
+            "khuyến khích sử dụng @NoInternalInstance annotation.";
 
     private DianxinCore() {}
 
     @ApiStatus.Internal // chỉ framework được gọi
     static void setServer(Server serverInstance, BotMeta metaInstance) {
         if (server != null) {
-            throw new IllegalStateException("DianxinCore Server đã được khởi tạo! " +
-                    "Nếu bạn đang mở 2 bot trong cùng 1 file jar, " +
-                    "khuyến khích sử dụng @NoInternalInstance annotation.");
+            throw new IllegalStateException(ALREADY_INITIALIZED);
         }
         server = serverInstance;
         meta = metaInstance;

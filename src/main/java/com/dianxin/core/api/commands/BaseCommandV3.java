@@ -10,7 +10,6 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.InteractionContextType;
 import net.dv8tion.jda.api.interactions.commands.build.*;
-import org.jetbrains.annotations.ApiStatus.Experimental;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,17 +17,12 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * <h2>BaseCommandV2</h2>
- *
+ * <h4>BaseCommandV3</h4>
+ * <p>
  * Lớp cơ sở cho tất cả các Slash Command trong hệ thống bot.
  * <p>
- * Cung cấp sẵn các tính năng phổ biến:
- * <ul>
- *   <li>Kiểm tra môi trường guild-only</li>
- *   <li>Tự động defer reply (nếu được bật)</li>
- *   <li>Kiểm tra quyền của user và bot</li>
- *   <li>Cơ chế debug tiện dụng</li>
- * </ul>
+ * Relations:
+ * <br>- Annotation: {@link com.dianxin.core.api.annotations.commands}
  *
  * <h3>Cách sử dụng:</h3>
  * <pre>{@code
@@ -49,7 +43,7 @@ import java.util.List;
  * }</pre>
  *
  */
-@Experimental
+@SuppressWarnings("unused")
 public abstract class BaseCommandV3 {
     private final Logger logger;
     private final JDA jda;
