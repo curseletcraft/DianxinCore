@@ -7,8 +7,10 @@ import com.dianxin.core.api.annotations.core.NoInternalInstance;
 import com.dianxin.core.api.annotations.core.OnDisable;
 import com.dianxin.core.api.annotations.core.OnEnable;
 import com.dianxin.core.api.annotations.core.UsingLikeBukkitLogback;
+import com.dianxin.core.api.exceptions.ServiceUnavailableException;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
 import com.dianxin.core.api.meta.BotMeta;
+import com.dianxin.core.api.utils.lifecycle.VersionController;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -138,6 +140,15 @@ public abstract class JavaDiscordBot {
         if (started) {
             throw new IllegalStateException("Bot đã được start rồi!");
         }
+
+        try {
+            VersionController.checkCompatibilityOrThrow();
+        } catch (ServiceUnavailableException e) {
+            LoggerFactory.getLogger(getClass()).error("❌ {}", e.getMessage());
+            System.exit(-1);
+            return;
+        }
+
         started = true;
 
         JDABuilder jdaBuilder;
