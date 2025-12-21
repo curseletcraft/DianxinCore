@@ -4,8 +4,6 @@ import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
 import com.dianxin.core.api.annotations.core.NoInternalInstance;
-import com.dianxin.core.api.annotations.core.OnDisable;
-import com.dianxin.core.api.annotations.core.OnEnable;
 import com.dianxin.core.api.annotations.core.UsingLikeBukkitLogback;
 import com.dianxin.core.api.exceptions.ServiceUnavailableException;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
@@ -187,23 +185,18 @@ public abstract class JavaDiscordBot {
         consoleManager.startListening(this);
 
         onEnable();
-        invokeLifecycleAnnotation(OnEnable.class);
     }
 
     /**
      * Called when the bot fully starts and is ready.
      * Override to initialize listeners, commands, database, etc.
-     * @deprecated Use @OnEnable annotation instead
      */
-    @Deprecated
     public void onEnable() { }
 
     /**
      * Called before the bot shuts down.
      * Override to close resources or save data.
-     * @deprecated Use @OnDisable annotation instead
      */
-    @Deprecated
     public void onDisable() { }
 
     /**
@@ -211,7 +204,6 @@ public abstract class JavaDiscordBot {
      * calling {@link #onDisable()}, and closing the JDA connection.
      */
     public void onShutdown() {
-        invokeLifecycleAnnotation(OnDisable.class);
         onDisable();
         logger.info("⏹ Đang tắt bot {}...", botName);
         jda.getPresence().setStatus(OnlineStatus.OFFLINE);
