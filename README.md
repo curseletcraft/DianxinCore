@@ -32,7 +32,7 @@ Với maven:
   <dependency>
     <groupId>net.dv8tion</groupId>
     <artifactId>JDA</artifactId>
-    <version>6.1.3</version>
+    <version>6.2.0</version>
   </dependency>
 ```
 ```xml
