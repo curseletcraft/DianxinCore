@@ -36,10 +36,17 @@ public class CommandHandler extends ListenerAdapter {
         this.jda.addEventListener(this);
     }
 
+    /**
+     * Khởi tạo CommandHandler, truyền JavaDiscordBot
+     */
     public <T extends JavaDiscordBot> CommandHandler(T bot) {
         this(bot.getJda());
     }
 
+    /**
+     * Phương thức đăng ký command
+     * @param cmds Các lệnh cần thiết
+     */
     public void register(@NotNull BaseCommandV3... cmds) {
         CommandListUpdateAction action = jda.updateCommands();
         for(BaseCommandV3 cmd : cmds) {

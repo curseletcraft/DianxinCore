@@ -2,6 +2,7 @@ package com.dianxin.core.api.commands;
 
 import com.dianxin.core.api.DianxinCore;
 import com.dianxin.core.api.annotations.commands.*;
+import com.dianxin.core.api.annotations.core.NoInternalInstance;
 import com.dianxin.core.api.meta.BotMeta;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
@@ -10,6 +11,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.InteractionContextType;
 import net.dv8tion.jda.api.interactions.commands.build.*;
+import org.jetbrains.annotations.ApiStatus.Internal;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,10 +51,19 @@ public abstract class BaseCommandV3 {
     private final JDA jda;
     private final BotMeta botMeta;
 
+    /**
+     * Khởi tạo Base Command, sử dụng DianxinServices
+     * @throws IllegalStateException Khi DianxinCore chưa được init, có thể do đang sử dụng {@link NoInternalInstance}
+     */
     public BaseCommandV3() {
         this(DianxinCore.getJda(), DianxinCore.getBotMeta());
     }
 
+    /**
+     * Khởi tạo Base Command, sử dụng jda thủ công
+     * @param jda JDA thủ công được truyền vào
+     * @param meta Bot Meta thủ công được truyền vòa
+     */
     public BaseCommandV3(JDA jda, BotMeta meta) {
         this.logger = LoggerFactory.getLogger(this.getClass());
         this.jda = jda;
@@ -73,7 +84,12 @@ public abstract class BaseCommandV3 {
         return jda;
     }
 
-    public final void handle(SlashCommandInteractionEvent event) {
+    /**
+     * Phương thức vận hành command
+     * @param event SlashCommandInteractionEvent được truyền
+     */
+    @Internal
+    protected final void handle(SlashCommandInteractionEvent event) {
         if (!checkOwnerOnly(event)) return;
         if (!checkGuildOnly(event)) return;
         if (!checkUserPermissions(event)) return;
@@ -187,8 +203,8 @@ public abstract class BaseCommandV3 {
 
     // =========================================
     // start of command data constructor
-
-    public final CommandData buildCommandData() {
+    @Internal
+    protected final CommandData buildCommandData() {
         Class<?> clazz = this.getClass();
 
         RegisterCommand reg = clazz.getAnnotation(RegisterCommand.class);
@@ -198,20 +214,16 @@ public abstract class BaseCommandV3 {
 
         SlashCommandData commandData = Commands.slash(reg.name(), reg.description());
 
-        // -----------------------
         // Context types
-        // -----------------------
         if(clazz.isAnnotationPresent(GuildOnly.class)) {
             commandData.setContexts(InteractionContextType.GUILD); // chỉ cho phép đăng ký lệnh trên guild
-            /*
-            TODO thêm các annotation như @DirectMessageOnly -> InteractionContextType.BOT_DM,
-             @PrivateChannelOnly -> InteractionContextType.PRIVATE_CHANNEL
-             */
+        } else if(clazz.isAnnotationPresent(DirectMessageOnly.class)) {
+            commandData.setContexts(InteractionContextType.BOT_DM);
+        } else if(clazz.isAnnotationPresent(PrivateChannelOnly.class)) {
+            commandData.setContexts(InteractionContextType.PRIVATE_CHANNEL);
         } else {
             commandData.setContexts(InteractionContextType.ALL);
         }
-
-        // TODO thêm annotation NSFW only?
 
         // đăng ký các option
         List<OptionData> options = getOptions();
@@ -235,4 +247,6 @@ public abstract class BaseCommandV3 {
         // như addSubcommandsGroups chẳng hạn
         return commandData;
     }
+    // =========================================
+    // end of command data constructor
 }
