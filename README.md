@@ -25,7 +25,7 @@ Với maven:
   <dependency>
     <groupId>com.github.CurseletCraft</groupId>
     <artifactId>DianxinCore</artifactId>
-    <version>1.0.15.2</version>
+    <version>1.0.16.1</version>
   </dependency>
         
   <!-- https://mvnrepository.com/artifact/net.dv8tion/JDA -->
@@ -45,7 +45,7 @@ Với maven:
 Với gradle:
 ```groovy
 dependencies {
-    implementation 'com.github.CurseletCraft:DianxinCore:1.0.15.2'
+    implementation 'com.github.CurseletCraft:DianxinCore:1.0.16.1'
 }
 
 repositories {
