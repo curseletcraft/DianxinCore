@@ -142,7 +142,7 @@ public abstract class JavaDiscordBot {
         try {
             VersionController.checkCompatibilityOrThrow();
         } catch (ServiceUnavailableException e) {
-            LoggerFactory.getLogger(getClass()).error("❌ {}", e.getMessage());
+            LoggerFactory.getLogger(getClass()).error("❌ {}", e.getMessage(), e);
             System.exit(-1);
             return;
         }
