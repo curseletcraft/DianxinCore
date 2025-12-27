@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public final class VersionController {
     private static final String REQUIRED_JDA_VERSION = "6.2.0"; // Version JDA tối thiểu DianxinCore hỗ trợ
+    private static final int REQUIRED_JAVA_VERSION = 21;
 
     private VersionController() {}
 
@@ -18,17 +19,32 @@ public final class VersionController {
     }
 
     /**
+     * Java feature version (21, 17, 11, ...)
+     */
+    public static int getJavaVersion() {
+        return Runtime.version().feature();
+    }
+
+    /**
      * Kiểm tra JDA của developer có tương thích không
      *
      * @throws ServiceUnavailableException nếu version thấp hơn yêu cầu
      */
     public static void checkCompatibilityOrThrow() {
-        String implemented = getJdaVersionImplemented();
+        int javaVersion = getJavaVersion();
+        String jdaVersion = getJdaVersionImplemented();
 
-        if (!isCompatibleVersion(implemented)) {
+        if (javaVersion < REQUIRED_JAVA_VERSION) {
+            throw new ServiceUnavailableException(
+                    "Version Java không tương thích! Yêu cầu >= " + REQUIRED_JAVA_VERSION +
+                            ", nhưng đang dùng " + javaVersion
+            );
+        }
+        
+        if (!isCompatibleVersion(jdaVersion)) {
             throw new ServiceUnavailableException(
                     "JDA version không tương thích! Yêu cầu >= " + REQUIRED_JDA_VERSION +
-                            ", nhưng đang dùng " + implemented
+                            ", nhưng đang dùng " + jdaVersion
             );
         }
     }
