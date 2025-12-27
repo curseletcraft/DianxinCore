@@ -5,6 +5,7 @@ import com.dianxin.core.api.meta.BotMeta;
 import net.dv8tion.jda.api.JDA;
 import org.jetbrains.annotations.ApiStatus;
 
+@Deprecated
 public final class DianxinCore {
 
     private static Server server;

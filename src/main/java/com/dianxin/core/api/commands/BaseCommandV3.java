@@ -3,6 +3,9 @@ package com.dianxin.core.api.commands;
 import com.dianxin.core.api.DianxinCore;
 import com.dianxin.core.api.annotations.commands.*;
 import com.dianxin.core.api.annotations.core.NoInternalInstance;
+import com.dianxin.core.api.exceptions.command.EmptyStringException;
+import com.dianxin.core.api.exceptions.command.InvalidRegistrationNameException;
+import com.dianxin.core.api.exceptions.command.MissingAnnotationException;
 import com.dianxin.core.api.meta.BotMeta;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
@@ -203,16 +206,39 @@ public abstract class BaseCommandV3 {
 
     // =========================================
     // start of command data constructor
+
+    /**
+     * Lấy bộ dữ liệu CommandData của một BaseCommand đã được implement.
+     * <br>
+     * Đây là khối dữ liệu quan trọng nhất để Discord API (tức JDA) định hình được command cần đăng ký
+     * và sử dụng được một cách hợp lệ.
+     *
+     * @throws MissingAnnotationException Command kế thừa {@link BaseCommandV3} không annotate {@link CommandTree}
+     * @throws EmptyStringException Name trong {@link CommandTree} đang để trống
+     * @throws InvalidRegistrationNameException {@link CommandTree} với name nhập hơn 2 từ
+     *
+     * @return CommandData của class
+     */
     @Internal
     protected final CommandData buildCommandData() {
         Class<?> clazz = this.getClass();
 
-        RegisterCommand reg = clazz.getAnnotation(RegisterCommand.class);
+        CommandTree reg = clazz.getAnnotation(CommandTree.class);
         if (reg == null) {
-            throw new IllegalStateException("Missing @RegisterCommand annotation on " + clazz.getSimpleName());
+            throw new MissingAnnotationException(CommandTree.class, clazz);
         }
 
-        SlashCommandData commandData = Commands.slash(reg.name(), reg.description());
+        // ví dụ @CommandTree(name = "moderation kick", ...) thì split thành moderation là nhánh chính, kick là nhánh phụ
+        List<String> branches = List.of(reg.name().split(" "));
+        if (branches.isEmpty()) {
+            throw new EmptyStringException("@CommandTree name không hợp lệ");
+        }
+
+        SlashCommandData commandData = Commands.slash(branches.getFirst(), reg.description()); // đáng ngại
+
+        if (branches.size() > 2) {
+            throw new InvalidRegistrationNameException("CommandTree chỉ hỗ trợ tối đa 2 cấp (root sub): " + reg.name());
+        }
 
         // Context types
         if(clazz.isAnnotationPresent(GuildOnly.class)) {
@@ -223,6 +249,11 @@ public abstract class BaseCommandV3 {
             commandData.setContexts(InteractionContextType.PRIVATE_CHANNEL);
         } else {
             commandData.setContexts(InteractionContextType.ALL);
+        }
+
+        if (branches.size() == 2) {
+            String subName = branches.get(1);
+            SubcommandData sub = new SubcommandData(subName, reg.description());
         }
 
         // đăng ký các option
