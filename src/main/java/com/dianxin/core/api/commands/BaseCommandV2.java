@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * }</pre>
  *
  */
-@Deprecated
+@Deprecated(since = "1.0.16.2")
 public abstract class BaseCommandV2 {
     private final Logger logger;
     private final JDA jda;

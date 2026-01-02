@@ -50,7 +50,7 @@ import java.util.List;
  *
  */
 @SuppressWarnings("unused")
-@Deprecated
+@Deprecated(since = "1.0.16.2")
 @ForRemoval(deadline = "1.1.2")
 public abstract class BaseCommandV3 {
     private final Logger logger;

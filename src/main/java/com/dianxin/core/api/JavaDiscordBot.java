@@ -174,6 +174,11 @@ public abstract class JavaDiscordBot {
         // nếu có annotation @NoInternalInstance thì bỏ qua dòng này
         if(this.getClass().isAnnotationPresent(RegisterToriService.class)) {
             ToriServices.initialize(this);
+            logger.info(
+                    "Đang sử dụng ToriService v{} (API version: {})",
+                    ToriServices.getToriServiceVersion(),
+                    ToriServices.getToriServiceApiVersion()
+            );
         }
 
         logger.info("✅ Bot {} đã khởi động thành công.", botName);
@@ -213,7 +218,7 @@ public abstract class JavaDiscordBot {
          * Shutdown các task khác ngoại trừ bot.onShutdown()
          * Xem {@link InternalServer#shutdown()}
          */
-        DianxinCore.getServer().getScheduler().shutdown();
+        // DianxinCore.getServer().getScheduler().shutdown();
 
         jda.shutdown();
     }

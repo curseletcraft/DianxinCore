@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Deprecated
+@Deprecated(since = "1.0.16.2")
 @ForRemoval(deadline = "1.1.2")
 @SuppressWarnings("unused")
 public final class CommandTreeRegistry {

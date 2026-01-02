@@ -3,6 +3,7 @@ package com.dianxin.core.api.utils.services;
 import com.dianxin.core.api.JavaDiscordBot;
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.exceptions.ServiceUnavailableException;
+import com.dianxin.core.api.meta.BotMeta;
 import com.dianxin.core.api.utils.quicksetup.ActivityContext;
 import com.dianxin.core.api.utils.quicksetup.IntentContext;
 import com.dianxin.core.api.utils.tori.ModerationUtils;
@@ -17,8 +18,8 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public final class ToriServices {
-    private static final String TORI_SERVICE_API_VERSION = "1.1.0-M1";
-    private static final int TORI_SERVICES_VERSION = 2;
+    private static final String TORI_SERVICE_API_VERSION = "4";
+    private static final String TORI_SERVICES_VERSION = "1.1.0-M2";
 
     private static boolean initialized = false;
 
@@ -70,6 +71,13 @@ public final class ToriServices {
         return bot;
     }
 
+    public static BotMeta getBotMeta() {
+        if(bot == null) {
+            throw new ServiceUnavailableException("ToriServices is not initialized!");
+        }
+        return bot.getMeta();
+    }
+
     public static JDA getJda() {
         if(jda == null) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
@@ -103,7 +111,7 @@ public final class ToriServices {
         return TORI_SERVICE_API_VERSION;
     }
 
-    public static int getToriServiceVersion() {
+    public static String getToriServiceVersion() {
         return TORI_SERVICES_VERSION;
     }
 }

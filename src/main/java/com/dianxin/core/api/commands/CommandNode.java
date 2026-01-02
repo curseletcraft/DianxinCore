@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import java.util.ArrayList;
 import java.util.List;
 
-@Deprecated
+@Deprecated(since = "1.0.16.2")
 @ForRemoval(deadline = "1.1.2")
 @SuppressWarnings("unused")
 final class CommandNode {

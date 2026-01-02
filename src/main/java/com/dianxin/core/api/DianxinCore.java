@@ -1,6 +1,5 @@
 package com.dianxin.core.api;
 
-import com.dianxin.core.api.annotations.core.NoInternalInstance;
 import com.dianxin.core.api.meta.BotMeta;
 import net.dv8tion.jda.api.JDA;
 import org.jetbrains.annotations.ApiStatus;
@@ -29,29 +28,16 @@ public final class DianxinCore {
         checkInit();
         return server;
     }
-
-    /**
-     * Method Lấy BotMeta của bot discord chính
-     * @throws IllegalStateException Khi DianxinCore chưa được init, có thể do đang sử dụng {@link NoInternalInstance}
-     */
     public static BotMeta getBotMeta() {
         checkInit();
         return meta;
     }
 
-    /**
-     * Method Lấy JDA của bot discord chính
-     * @throws IllegalStateException Khi DianxinCore chưa được init, có thể do đang sử dụng {@link NoInternalInstance}
-     */
     public static JDA getJda() {
         checkInit();
         return server.getJda();
     }
 
-    /**
-     * Method private kiểm tra xem JDA đã được khai báo trong DianxinCore chưa
-     * @throws IllegalStateException Khi DianxinCore chưa được init, có thể do đang sử dụng {@link NoInternalInstance}
-     */
     private static void checkInit() {
         if (server == null) {
             throw new IllegalStateException("DianxinCore chưa được initialize!");

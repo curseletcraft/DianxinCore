@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-@Deprecated
+@Deprecated(since = "1.0.16.2")
 @ForRemoval(deadline = "1.1.2")
 @SuppressWarnings("unused")
 public class CommandHandler extends ListenerAdapter {
