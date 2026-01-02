@@ -14,7 +14,7 @@ public final class ActivityContext {
     private ActivityContext() { }
 
     @Nullable
-    public Activity parseActivity(@Nullable String rawType, @NotNull String context, @Nullable String url) {
+    public static Activity parseActivity(@Nullable String rawType, @NotNull String context, @Nullable String url) {
         ToriServices.getJda(); // ignore
 
         if (rawType == null) return null;

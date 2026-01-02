@@ -11,13 +11,13 @@ public final class IntentContext {
     private IntentContext() { }
 
     @NotNull
-    public EnumSet<GatewayIntent> getAllIntents() {
+    public static EnumSet<GatewayIntent> getAllIntents() {
         ToriServices.getJda(); // ignore
         return EnumSet.allOf(GatewayIntent.class);
     }
 
     @NotNull
-    public EnumSet<GatewayIntent> getDefaultIntents() {
+    public static EnumSet<GatewayIntent> getDefaultIntents() {
         ToriServices.getJda(); // ignore
         return EnumSet.of(
                 GatewayIntent.GUILD_MEMBERS,

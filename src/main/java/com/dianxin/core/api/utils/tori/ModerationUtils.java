@@ -13,13 +13,13 @@ import java.util.concurrent.TimeUnit;
 public final class ModerationUtils {
     private ModerationUtils() { }
 
-    public void ban(@NotNull Guild guild, @NotNull User user, String reason) {
+    public static void ban(@NotNull Guild guild, @NotNull User user, String reason) {
         guild.ban(user, 7, TimeUnit.DAYS)
                 .reason(reason)
                 .queue();
     }
 
-    public void kick(@NotNull Guild guild, @NotNull User user, String reason) {
+    public static void kick(@NotNull Guild guild, @NotNull User user, String reason) {
         guild.kick(user)
                 .reason(reason)
                 .queue();
