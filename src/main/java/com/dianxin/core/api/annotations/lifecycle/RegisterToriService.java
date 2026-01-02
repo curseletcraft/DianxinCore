@@ -1,6 +1,6 @@
 package com.dianxin.core.api.annotations.lifecycle;
 
-import com.dianxin.core.api.services.ToriServices;
+import com.dianxin.core.api.services.SubServiceType;
 
 import java.lang.annotation.*;
 
@@ -8,5 +8,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface RegisterToriService {
-    ToriServices.ServiceType[] exclude() default {};
+    SubServiceType[] exclude() default {};
 }

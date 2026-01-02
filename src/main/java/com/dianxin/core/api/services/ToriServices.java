@@ -10,7 +10,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 public final class ToriServices {
-    private static final String DIANXIN_CORE_API_VERSION = "1.0.16.2"; // TODO update lên 1.1.0
+    private static final String DIANXIN_CORE_API_VERSION = "1.1.0";
     private static final int DIANXIN_SERVICES_VERSION = 2;
 
     private static boolean initialized = false;
@@ -28,26 +28,17 @@ public final class ToriServices {
         RegisterToriService ann = bot.getClass().getAnnotation(RegisterToriService.class);
         if(ann == null) return;
 
-        EnumSet<ServiceType> enabled = EnumSet.allOf(ServiceType.class);
+        EnumSet<SubServiceType> enabled = EnumSet.allOf(SubServiceType.class);
         List.of(ann.exclude()).forEach(enabled::remove);
 
-        if (enabled.contains(ServiceType.MODERATION_UTILS)) {
+        if (enabled.contains(SubServiceType.MODERATION_UTILS)) {
             ModerationUtils.initialize(bot);
         }
 
-        if (enabled.contains(ServiceType.DEBUG_UTILS)) {
+        if (enabled.contains(SubServiceType.DEBUG_UTILS)) {
             DebugUtils.initialize(bot);
         }
 
         initialized = true;
-    }
-
-    public enum ServiceType {
-        MODERATION_UTILS,
-        COLOR_UTILS,
-        DEBUG_UTILS,
-        ACTIVITY_CONTEXT,
-        INTENT_CONTEXT,
-        TIME_UTILS;
     }
 }
