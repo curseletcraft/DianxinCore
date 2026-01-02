@@ -4,6 +4,7 @@ import com.dianxin.core.api.annotations.commands.CommandTree;
 import com.dianxin.core.api.exceptions.EmptyStringException;
 import com.dianxin.core.api.exceptions.InvalidRegistrationNameException;
 import com.dianxin.core.api.exceptions.MissingAnnotationException;
+import net.dv8tion.jda.annotations.ForRemoval;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
@@ -14,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated
+@ForRemoval(deadline = "1.1.2")
+@SuppressWarnings("unused")
 public final class CommandTreeRegistry {
     private static final Map<String, CommandNode> ROOTS = new HashMap<>();
 

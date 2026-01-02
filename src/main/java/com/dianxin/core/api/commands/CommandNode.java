@@ -1,10 +1,14 @@
 package com.dianxin.core.api.commands;
 
+import net.dv8tion.jda.annotations.ForRemoval;
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
+@ForRemoval(deadline = "1.1.2")
+@SuppressWarnings("unused")
 final class CommandNode {
     final String name;
     String description;

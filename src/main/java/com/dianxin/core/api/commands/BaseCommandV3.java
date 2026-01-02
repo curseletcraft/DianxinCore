@@ -7,6 +7,7 @@ import com.dianxin.core.api.exceptions.EmptyStringException;
 import com.dianxin.core.api.exceptions.InvalidRegistrationNameException;
 import com.dianxin.core.api.exceptions.MissingAnnotationException;
 import com.dianxin.core.api.meta.BotMeta;
+import net.dv8tion.jda.annotations.ForRemoval;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -49,6 +50,8 @@ import java.util.List;
  *
  */
 @SuppressWarnings("unused")
+@Deprecated
+@ForRemoval(deadline = "1.1.2")
 public abstract class BaseCommandV3 {
     private final Logger logger;
     private final JDA jda;
