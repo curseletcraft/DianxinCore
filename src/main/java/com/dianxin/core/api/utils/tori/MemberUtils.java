@@ -1,30 +1,17 @@
 package com.dianxin.core.api.utils.tori;
 
 import com.dianxin.core.api.JavaDiscordBot;
+import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 
 @ApiStatus.AvailableSince("1.1.1")
 public final class MemberUtils {
-    private final JavaDiscordBot bot;
+    private final JavaDiscordBot bot = ToriServices.getBaseBot();
     private static MemberUtils INSTANCE;
 
-    private MemberUtils(JavaDiscordBot bot) {
-        this.bot = bot;
-    }
-
-    public JavaDiscordBot getBaseBot() {
-        return bot;
-    }
-
-    public static void initialize(@NotNull JavaDiscordBot bot) {
-        if (INSTANCE != null) {
-            throw new UnsupportedOperationException("MemberUtils already initialized");
-        }
-        INSTANCE = new MemberUtils(bot);
-    }
+    private MemberUtils() { }
 
     public static MemberUtils memberUtils() {
         return MemberUtils.INSTANCE;
