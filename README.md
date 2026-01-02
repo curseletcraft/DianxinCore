@@ -25,7 +25,7 @@ Với maven:
   <dependency>
     <groupId>com.github.CurseletCraft</groupId>
     <artifactId>DianxinCore</artifactId>
-    <version>1.0.16.2</version>
+    <version>1.1.0-M1</version>
   </dependency>
         
   <!-- https://mvnrepository.com/artifact/net.dv8tion/JDA -->

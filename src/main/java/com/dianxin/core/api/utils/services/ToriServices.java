@@ -17,7 +17,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public final class ToriServices {
-    private static final String TORI_SERVICE_API_VERSION = "1.1.0";
+    private static final String TORI_SERVICE_API_VERSION = "1.1.0-M1";
     private static final int TORI_SERVICES_VERSION = 2;
 
     private static boolean initialized = false;
