@@ -3,6 +3,7 @@ package com.dianxin.core.api.commands;
 import com.dianxin.core.api.DianxinCore;
 import com.dianxin.core.api.JavaDiscordBot;
 import com.dianxin.core.api.annotations.core.NoInternalInstance;
+import net.dv8tion.jda.annotations.ForRemoval;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -14,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
+@ForRemoval(deadline = "1.1.2")
 @SuppressWarnings("unused")
 public class CommandHandler extends ListenerAdapter {
     private final JDA jda;
