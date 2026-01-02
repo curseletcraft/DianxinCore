@@ -2,7 +2,7 @@ package com.dianxin.core.api.services;
 
 import com.dianxin.core.api.JavaDiscordBot;
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
-import com.dianxin.core.api.utils.guild.ModerationUtils;
+import com.dianxin.core.api.utils.tori.ModerationUtils;
 import com.dianxin.core.api.utils.java.DebugUtils;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -14,7 +14,6 @@ public final class ToriServices {
     private static final int DIANXIN_SERVICES_VERSION = 2;
 
     private static boolean initialized = false;
-
 
     private ToriServices() {
         throw new UnsupportedOperationException("ToriServices is a bootstrap class");
@@ -41,14 +40,6 @@ public final class ToriServices {
         }
 
         initialized = true;
-    }
-
-    /**
-     * @deprecated Dùng ModerationUtils.moderationUtils() hẳn luôn thay vì gọi ở đây
-     * @throws NullPointerException hoặc exception khác, khi ModerationUtils chưa được init (do dùng exclude)
-     */
-    public static ModerationUtils moderationUtils() {
-        return ModerationUtils.INSTANCE;
     }
 
     public enum ServiceType {

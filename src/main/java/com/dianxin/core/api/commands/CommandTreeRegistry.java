@@ -1,9 +1,9 @@
 package com.dianxin.core.api.commands;
 
 import com.dianxin.core.api.annotations.commands.CommandTree;
-import com.dianxin.core.api.exceptions.command.EmptyStringException;
-import com.dianxin.core.api.exceptions.command.InvalidRegistrationNameException;
-import com.dianxin.core.api.exceptions.command.MissingAnnotationException;
+import com.dianxin.core.api.exceptions.EmptyStringException;
+import com.dianxin.core.api.exceptions.InvalidRegistrationNameException;
+import com.dianxin.core.api.exceptions.MissingAnnotationException;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
