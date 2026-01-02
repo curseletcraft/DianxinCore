@@ -1,4 +1,4 @@
-package com.dianxin.core.api.utils.java;
+package com.dianxin.core.fastutil.utils;
 
 import java.awt.Color;
 import java.util.Random;

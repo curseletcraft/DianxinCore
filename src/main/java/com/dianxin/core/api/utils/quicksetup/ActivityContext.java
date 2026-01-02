@@ -1,6 +1,8 @@
 package com.dianxin.core.api.utils.quicksetup;
 
-import com.dianxin.core.api.utils.java.ColorUtil;
+import com.dianxin.core.api.JavaDiscordBot;
+import com.dianxin.core.api.exceptions.ServiceUnavailableException;
+import com.dianxin.core.fastutil.utils.Checks;
 import net.dv8tion.jda.api.entities.Activity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,13 +12,34 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("unused")
 public final class ActivityContext {
     private static final Logger logger = LoggerFactory.getLogger(ActivityContext.class);
+    private static JavaDiscordBot bot;
+    private static ActivityContext INSTANCE;
 
-    private ActivityContext() {
-        throw new UnsupportedOperationException(ActivityContext.class.getName() + " utility class cannot be initialized!");
+    private ActivityContext() { }
+
+    public static void initialize(@NotNull JavaDiscordBot bot) {
+        if(INSTANCE != null) {
+            throw new UnsupportedOperationException("ActivityContext is already initialized!");
+        }
+
+        ActivityContext.bot = bot;
+        ActivityContext.INSTANCE = new ActivityContext();
+    }
+
+    @NotNull
+    public static ActivityContext activityContext() {
+        Checks.notNull(INSTANCE, new ServiceUnavailableException("ActivityContext is not initialized!"));
+        return INSTANCE;
+    }
+
+    @NotNull
+    public JavaDiscordBot getBaseBot() {
+        Checks.notNull(INSTANCE, new ServiceUnavailableException("ActivityContext is not initialized!"));
+        return ActivityContext.bot;
     }
 
     @Nullable
-    public static Activity parseActivity(@Nullable String rawType, @NotNull String context, @Nullable String url) {
+    public Activity parseActivity(@Nullable String rawType, @NotNull String context, @Nullable String url) {
         if (rawType == null) return null;
 
         Activity.ActivityType type;

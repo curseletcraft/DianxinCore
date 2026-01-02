@@ -1,6 +1,6 @@
 package com.dianxin.core.api.annotations.lifecycle;
 
-import com.dianxin.core.api.services.SubServiceType;
+import com.dianxin.core.api.utils.services.SubServiceType;
 
 import java.lang.annotation.*;
 

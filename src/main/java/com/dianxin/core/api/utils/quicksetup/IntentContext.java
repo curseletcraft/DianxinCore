@@ -1,20 +1,51 @@
 package com.dianxin.core.api.utils.quicksetup;
 
+import com.dianxin.core.api.JavaDiscordBot;
+import com.dianxin.core.api.exceptions.ServiceUnavailableException;
+import com.dianxin.core.fastutil.utils.Checks;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.EnumSet;
 
 @SuppressWarnings("unused")
 public final class IntentContext {
-    private IntentContext() {
-        throw new UnsupportedOperationException(IntentContext.class.getName() + " utility class cannot be initialized!");
+    private static final Logger logger = LoggerFactory.getLogger(IntentContext.class);
+    private static JavaDiscordBot bot;
+    private static IntentContext INSTANCE;
+
+    private IntentContext() { }
+
+    public static void initialize(@NotNull JavaDiscordBot bot) {
+        if(INSTANCE != null) {
+            throw new UnsupportedOperationException("IntentContext is already initialized!");
+        }
+
+        IntentContext.bot = bot;
+        IntentContext.INSTANCE = new IntentContext();
     }
 
-    public static EnumSet<GatewayIntent> getAllIntents() {
+    @NotNull
+    public static IntentContext intentContext() {
+        Checks.notNull(INSTANCE, new ServiceUnavailableException("IntentContext is not initialized!"));
+        return IntentContext.INSTANCE;
+    }
+
+    @NotNull
+    public JavaDiscordBot getBaseBot() {
+        Checks.notNull(INSTANCE, new ServiceUnavailableException("IntentContext is not initialized!"));
+        return IntentContext.bot;
+    }
+
+    @NotNull
+    public EnumSet<GatewayIntent> getAllIntents() {
         return EnumSet.allOf(GatewayIntent.class);
     }
 
-    public static EnumSet<GatewayIntent> getDefaultIntents() {
+    @NotNull
+    public EnumSet<GatewayIntent> getDefaultIntents() {
         return EnumSet.of(
                 GatewayIntent.GUILD_MEMBERS,
                 GatewayIntent.GUILD_MODERATION,

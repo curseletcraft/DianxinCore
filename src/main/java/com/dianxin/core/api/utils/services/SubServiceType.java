@@ -1,4 +1,4 @@
-package com.dianxin.core.api.services;
+package com.dianxin.core.api.utils.services;
 
 public enum SubServiceType {
     MODERATION_UTILS,

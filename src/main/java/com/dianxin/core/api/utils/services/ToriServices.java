@@ -1,9 +1,9 @@
-package com.dianxin.core.api.services;
+package com.dianxin.core.api.utils.services;
 
 import com.dianxin.core.api.JavaDiscordBot;
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.utils.tori.ModerationUtils;
-import com.dianxin.core.api.utils.java.DebugUtils;
+import com.dianxin.core.fastutil.utils.DebugUtils;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.EnumSet;

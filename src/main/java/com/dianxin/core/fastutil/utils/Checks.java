@@ -6,4 +6,16 @@ public final class Checks {
             throw new IllegalArgumentException(name + " cannot be null");
         }
     }
+
+    public static void notNull(Object arg, Throwable t) throws Throwable {
+        if(arg == null) {
+            throw t;
+        }
+    }
+
+    public static void notNull(Object arg, RuntimeException re) {
+        if(arg == null) {
+            throw re;
+        }
+    }
 }

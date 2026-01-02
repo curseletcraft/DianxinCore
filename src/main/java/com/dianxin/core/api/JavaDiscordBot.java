@@ -3,11 +3,12 @@ package com.dianxin.core.api;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
-import com.dianxin.core.api.annotations.core.NoInternalInstance;
 import com.dianxin.core.api.annotations.core.UsingLikeBukkitLogback;
+import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.exceptions.ServiceUnavailableException;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
 import com.dianxin.core.api.meta.BotMeta;
+import com.dianxin.core.api.utils.services.ToriServices;
 import com.dianxin.core.api.utils.lifecycle.VersionController;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -171,8 +172,8 @@ public abstract class JavaDiscordBot {
 
         // Init static core
         // nếu có annotation @NoInternalInstance thì bỏ qua dòng này
-        if(!this.getClass().isAnnotationPresent(NoInternalInstance.class)) {
-            DianxinCore.setServer(new InternalServer(this), meta);
+        if(this.getClass().isAnnotationPresent(RegisterToriService.class)) {
+            ToriServices.initialize(this);
         }
 
         logger.info("✅ Bot {} đã khởi động thành công.", botName);
