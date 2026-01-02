@@ -20,7 +20,7 @@ public final class IntentContext {
 
     public static void initialize(@NotNull JavaDiscordBot bot) {
         if(INSTANCE != null) {
-            throw new UnsupportedOperationException("IntentContext is already initialized!");
+            throw new UnsupportedOperationException("IntentContext has already initialized!");
         }
 
         IntentContext.bot = bot;

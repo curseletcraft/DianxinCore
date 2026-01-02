@@ -22,7 +22,7 @@ public final class ToriServices {
     @ApiStatus.Internal
     public static <T extends JavaDiscordBot> void initialize(T bot) {
         if (initialized) {
-            throw new IllegalStateException("ToriServices đã được initialize!");
+            throw new IllegalStateException("ToriServices has already initialized!");
         }
 
         RegisterToriService ann = bot.getClass().getAnnotation(RegisterToriService.class);

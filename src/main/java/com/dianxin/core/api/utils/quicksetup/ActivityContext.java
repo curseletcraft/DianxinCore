@@ -19,7 +19,7 @@ public final class ActivityContext {
 
     public static void initialize(@NotNull JavaDiscordBot bot) {
         if(INSTANCE != null) {
-            throw new UnsupportedOperationException("ActivityContext is already initialized!");
+            throw new UnsupportedOperationException("ActivityContext has already initialized!");
         }
 
         ActivityContext.bot = bot;
