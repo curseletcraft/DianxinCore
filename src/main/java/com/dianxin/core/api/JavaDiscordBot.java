@@ -170,8 +170,6 @@ public abstract class JavaDiscordBot {
                 .build()
                 .awaitReady();
 
-        // Init static core
-        // nếu có annotation @NoInternalInstance thì bỏ qua dòng này
         if(this.getClass().isAnnotationPresent(RegisterToriService.class)) {
             ToriServices.initialize(this);
             logger.info(
