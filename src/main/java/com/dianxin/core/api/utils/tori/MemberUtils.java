@@ -3,8 +3,10 @@ package com.dianxin.core.api.utils.tori;
 import com.dianxin.core.api.JavaDiscordBot;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+@ApiStatus.AvailableSince("1.1.1")
 public final class MemberUtils {
     private final JavaDiscordBot bot;
     private static MemberUtils INSTANCE;

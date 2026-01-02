@@ -5,8 +5,10 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.Channel;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+@ApiStatus.AvailableSince("1.1.1")
 public final class ChannelUtils {
     private final JavaDiscordBot bot;
     private static ChannelUtils INSTANCE;

@@ -3,6 +3,7 @@ package com.dianxin.core.api.utils.tori;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.requests.RestAction;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,6 +15,7 @@ import java.time.OffsetDateTime;
  * Class này tập trung vào các thao tác đọc thông tin, format dữ liệu
  * và cung cấp các giá trị an toàn để hiển thị.
  */
+@ApiStatus.AvailableSince("1.1.1")
 final class UserUtils {
     private UserUtils() {
         throw new UnsupportedOperationException("Utility class");
