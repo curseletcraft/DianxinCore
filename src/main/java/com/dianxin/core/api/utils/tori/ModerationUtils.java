@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
 
+// TODO add more funcs
+@ApiStatus.AvailableSince("1.1.1")
 @SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class ModerationUtils {
     private static ModerationUtils INSTANCE;
