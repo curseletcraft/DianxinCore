@@ -14,7 +14,7 @@ public class ConsoleCommandManager {
     /** Đăng ký command */
     public void register(AbstractConsoleCommand cmd) {
         commands.put(cmd.getCommandLine().toLowerCase(), cmd);
-        logger.info("Đã đăng ký console command: {}", cmd.getCommandLine());
+        logger.info("✅ Đã đăng ký console command: {}", cmd.getCommandLine());
     }
 
     /** Bắt đầu đọc console */

@@ -7,6 +7,7 @@ import com.dianxin.core.api.annotations.core.UsingLikeBukkitLogback;
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.exceptions.ServiceUnavailableException;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
+import com.dianxin.core.api.handler.console.example.StopConsoleCommand;
 import com.dianxin.core.api.meta.BotMeta;
 import com.dianxin.core.api.utils.services.ToriServices;
 import com.dianxin.core.api.utils.lifecycle.VersionController;
@@ -136,6 +137,8 @@ public abstract class JavaDiscordBot {
      * @throws InterruptedException If the current thread is interrupted.
      */
     public synchronized void start() throws InterruptedException {
+        long startTime = System.currentTimeMillis(); // tính thời gian bắt đầu
+
         if (started) {
             throw new IllegalStateException("Bot đã được start rồi!");
         }
@@ -147,6 +150,8 @@ public abstract class JavaDiscordBot {
             System.exit(-1);
             return;
         }
+
+        this.getConsoleManager().register(new StopConsoleCommand(this));
 
         started = true;
 
@@ -189,6 +194,16 @@ public abstract class JavaDiscordBot {
         consoleManager.startListening(this);
 
         onEnable();
+
+        long elapsedMillis = System.currentTimeMillis() - startTime;
+
+        // Format hiển thị (Ví dụ: "1250 ms" hoặc "1.25 s")
+        if (elapsedMillis < 1000) {
+            logger.info("ℹ️ Khởi động bot hoàn tất! Đã khởi động trong {} ms", elapsedMillis);
+        } else {
+            double elapsedSeconds = elapsedMillis / 1000.0;
+            logger.info("ℹ️ Khởi động bot hoàn tất! Đã khởi động trong {} s", String.format("%.2f", elapsedSeconds));
+        }
     }
 
     /**
