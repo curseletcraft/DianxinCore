@@ -1,6 +1,5 @@
 package com.dianxin.core.api.utils.quicksetup;
 
-import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.jetbrains.annotations.NotNull;
 
