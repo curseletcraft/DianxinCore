@@ -1,7 +1,10 @@
 package com.dianxin.core.api.config.env;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 @SuppressWarnings("unused")
 public class VirtualEnvironmentConfiguration {
     private static final Dotenv dotenv = VirtualEnvironmentConfiguration.load();
@@ -13,6 +16,7 @@ public class VirtualEnvironmentConfiguration {
 
     private VirtualEnvironmentConfiguration() {}
 
+    @Nullable
     public static String get(String key) {
         // Ưu tiên env hệ thống trước
         String sys = System.getenv(key);
