@@ -1,5 +1,6 @@
 package com.dianxin.core.api.utils.tori;
 
+import com.dianxin.core.api.JavaDiscordBot;
 import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
@@ -17,6 +18,7 @@ import java.time.OffsetDateTime;
  */
 public final class UserUtils {
     @NotNull private static final JDA jda = ToriServices.getJda();
+    @NotNull private final JavaDiscordBot bot = ToriServices.getBaseBot();
 
     private UserUtils() {
         throw new UnsupportedOperationException("Utility class");
