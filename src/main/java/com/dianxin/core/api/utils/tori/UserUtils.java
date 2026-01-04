@@ -1,9 +1,9 @@
 package com.dianxin.core.api.utils.tori;
 
+import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.requests.RestAction;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,8 +15,9 @@ import java.time.OffsetDateTime;
  * Class này tập trung vào các thao tác đọc thông tin, format dữ liệu
  * và cung cấp các giá trị an toàn để hiển thị.
  */
-@ApiStatus.AvailableSince("1.1.1")
-final class UserUtils {
+public final class UserUtils {
+    @NotNull private static final JDA jda = ToriServices.getJda();
+
     private UserUtils() {
         throw new UnsupportedOperationException("Utility class");
     }
@@ -138,15 +139,26 @@ final class UserUtils {
     }
 
     /**
-     * Lấy {@link User} từ cache hoặc REST API nếu cần.
+     * Retrieve {@link User} thông qua Discord REST API.
      *
-     * @param jda instance JDA
-     * @param id  ID của user
-     * @return {@link RestAction} chứa User hoặc null nếu không tồn tại
+     * @param id user id
+     * @return {@link RestAction} thành công với {@link User} (non-null),
+     *         hoặc thất bại nếu user không tồn tại / không truy cập được
      */
     @NotNull
-    public static RestAction<@Nullable User> getUserById(@NotNull JDA jda, @NotNull String id) {
+    public static RestAction<User> retrieveUser(@NotNull String id) {
         return jda.retrieveUserById(id);
+    }
+
+    /**
+     * Lấy {@link User} từ cache.
+     *
+     * @param id user id
+     * @return {@link User} nếu có trong cache, ngược lại null
+     */
+    @Nullable
+    public static User getCachedUser(@NotNull String id) {
+        return jda.getUserById(id);
     }
 
     /**
