@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
 import org.jetbrains.annotations.ApiStatus;
 
-@ApiStatus.AvailableSince("1.1.1")
+@ApiStatus.AvailableSince("1.1.3")
 public final class ChannelUtils {
     private ChannelUtils() {}
 
