@@ -23,6 +23,11 @@ public class VirtualEnvironmentConfiguration {
         return sys != null ? sys : dotenv.get(key);
     }
 
+    public static String getOrDefault(String key, String defaultValue) {
+        String value = get(key);
+        return value != null ? value : defaultValue;
+    }
+
     public static String getOrThrow(String key) {
         String value = get(key);
         if (value == null) {
