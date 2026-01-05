@@ -1,24 +1,43 @@
 package com.dianxin.core.api.utils.tori;
 
+import com.dianxin.core.api.JavaDiscordBot;
 import com.dianxin.core.api.utils.services.ToriServices;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.Channel;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
-import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 
-@ApiStatus.AvailableSince("1.1.3")
+@SuppressWarnings({"unused"})
 public final class ChannelUtils {
-    private ChannelUtils() {}
+    @NotNull
+    private static final JavaDiscordBot bot = ToriServices.getBaseBot();
 
+    @NotNull
+    private static final JDA jda = bot.getJda();
+
+    private ChannelUtils() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    /**
+     * @throws com.dianxin.core.api.exceptions.ServiceUnavailableException nếu ToriService chưa được init
+     */
     public static Channel getChannelById(String id) {
-        return ToriServices.getJda().getChannelById(Channel.class, id);
+        return jda.getChannelById(Channel.class, id);
     }
 
+    /**
+     * @throws com.dianxin.core.api.exceptions.ServiceUnavailableException nếu ToriService chưa được init
+     */
     public static TextChannel getTextChannelById(String id) {
-        return ToriServices.getJda().getTextChannelById(id);
+        return jda.getTextChannelById(id);
     }
 
+    /**
+     * @throws com.dianxin.core.api.exceptions.ServiceUnavailableException nếu ToriService chưa được init
+     */
     public static VoiceChannel getVoiceChannelById(String id) {
-        return ToriServices.getJda().getVoiceChannelById(id);
+        return jda.getVoiceChannelById(id);
     }
 }

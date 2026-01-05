@@ -39,6 +39,11 @@ public final class ToriServices {
         initialized = true;
     }
 
+    /**
+     * Lấy base bot của bot đã được ứng
+     * @return JavaDiscordBot, không phải bot được extend
+     * @throws ServiceUnavailableException nếu bot không được init, hoặc do chưa annotate {@link RegisterToriService}
+     */
     public static JavaDiscordBot getBaseBot() {
         if(jda == null) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
