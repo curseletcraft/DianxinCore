@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 /**
  * Đặt command có thể được debug trên console.
  */
+@SuppressWarnings("unused")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface DebugCommand {

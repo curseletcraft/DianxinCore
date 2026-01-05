@@ -16,7 +16,7 @@ import java.nio.file.Files;
  *
  * @param <T> Kiểu config cụ thể, phải kế thừa AbstractBotConfiguration
  */
-@SuppressWarnings({"ResultOfMethodCallIgnored"})
+@SuppressWarnings({"ResultOfMethodCallIgnored", "unused"})
 public class Json5GenericConfiguration<T extends AbstractBotConfiguration> {
     private final Logger logger = LoggerFactory.getLogger(Json5GenericConfiguration.class);
 

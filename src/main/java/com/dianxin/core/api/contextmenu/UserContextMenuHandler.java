@@ -2,7 +2,6 @@ package com.dianxin.core.api.contextmenu;
 
 import com.dianxin.core.api.JavaDiscordBot;
 import com.dianxin.core.api.annotations.contextmenu.ContextMenu;
-import com.dianxin.core.api.annotations.core.NoInternalInstance;
 import com.dianxin.core.api.exceptions.InvalidRegistrationNameException;
 import com.dianxin.core.api.exceptions.MissingAnnotationException;
 import com.dianxin.core.api.utils.services.ToriServices;
@@ -27,7 +26,7 @@ public class UserContextMenuHandler extends ListenerAdapter {
 
     /**
      * Khởi tạo UserContextMenuHandler, sử dụng DianxinService để lấy JDA
-     * @throws IllegalStateException Khi DianxinCore chưa được init, có thể do đang sử dụng {@link NoInternalInstance}
+     * @throws IllegalStateException Khi ToriService chưa được init, có thể do chưa sử dụng {@link com.dianxin.core.api.annotations.lifecycle.RegisterToriService}
      */
     public UserContextMenuHandler() {
         this(ToriServices.getJda());

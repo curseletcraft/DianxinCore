@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.*;
 import org.slf4j.Logger;
@@ -60,6 +61,8 @@ public abstract class BaseCommand {
      */
     public final void handle(SlashCommandInteractionEvent event) {
         if (!checkOwnerOnly(event)) return;
+        if (!checkDMOnly(event)) return;
+        if (!checkPrivateChannelOnly(event)) return;
         if (!checkGuildOnly(event)) return;
         if (!checkUserPermissions(event)) return;
         if (!checkBotPermissions(event)) return;
@@ -87,6 +90,24 @@ public abstract class BaseCommand {
         }
 
         return true;
+    }
+
+    private boolean checkDMOnly(SlashCommandInteractionEvent event) {
+        if(!getClass().isAnnotationPresent(DirectMessageOnly.class)) return true;
+
+        if(event.getGuild() != null) {
+            event.reply("❌ Lệnh này chỉ được dùng khi DMs (nhắn riêng).").setEphemeral(true).queue();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean checkPrivateChannelOnly(SlashCommandInteractionEvent event) {
+        if(!getClass().isAnnotationPresent(PrivateChannelOnly.class)) return true;
+        if (event.getChannelType() == ChannelType.PRIVATE) return true;
+        event.reply("❌ Lệnh này chỉ được dùng trong DMs/Private Channel.").setEphemeral(true).queue();
+        return false;
     }
 
     private boolean checkGuildOnly(SlashCommandInteractionEvent event) {
