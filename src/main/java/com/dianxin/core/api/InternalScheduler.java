@@ -4,6 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+@Deprecated
 final class InternalScheduler implements Scheduler {
     private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 

@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+@Deprecated
 final class InternalAsyncScheduler implements AsyncScheduler {
     private final ExecutorService asyncPool = Executors.newCachedThreadPool();
 

@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
+// TODO
+@ApiStatus.AvailableSince("1.2")
 public class UserContextMenuHandler extends ListenerAdapter {
     private final JDA jda;
     private final Map<String, BaseUserContextMenu> commands = new HashMap<>();

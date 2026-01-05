@@ -4,6 +4,7 @@ import org.jetbrains.annotations.ApiStatus;
 
 import java.util.concurrent.TimeUnit;
 
+@Deprecated
 @ApiStatus.Experimental
 public interface Scheduler {
 

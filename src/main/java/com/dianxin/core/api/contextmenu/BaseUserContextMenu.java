@@ -1,9 +1,12 @@
 package com.dianxin.core.api.contextmenu;
 
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;
+import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// TODO
+@ApiStatus.AvailableSince("1.2")
 public abstract class BaseUserContextMenu {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
