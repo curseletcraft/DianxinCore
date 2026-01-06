@@ -1,6 +1,7 @@
 package com.dianxin.core.api.utils.tori;
 
 import com.dianxin.core.api.JavaDiscordBot;
+import com.dianxin.core.api.exceptions.lifecycle.ServiceUnavailableException;
 import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.Channel;
@@ -21,21 +22,21 @@ public final class ChannelUtils {
     }
 
     /**
-     * @throws com.dianxin.core.api.exceptions.ServiceUnavailableException nếu ToriService chưa được init
+     * @throws ServiceUnavailableException nếu ToriService chưa được init
      */
     public static Channel getChannelById(String id) {
         return jda.getChannelById(Channel.class, id);
     }
 
     /**
-     * @throws com.dianxin.core.api.exceptions.ServiceUnavailableException nếu ToriService chưa được init
+     * @throws ServiceUnavailableException nếu ToriService chưa được init
      */
     public static TextChannel getTextChannelById(String id) {
         return jda.getTextChannelById(id);
     }
 
     /**
-     * @throws com.dianxin.core.api.exceptions.ServiceUnavailableException nếu ToriService chưa được init
+     * @throws ServiceUnavailableException nếu ToriService chưa được init
      */
     public static VoiceChannel getVoiceChannelById(String id) {
         return jda.getVoiceChannelById(id);

@@ -1,4 +1,4 @@
-package com.dianxin.core.api.exceptions;
+package com.dianxin.core.api.exceptions.annotation;
 
 @SuppressWarnings("unused")
 public class MissingAnnotationException extends IllegalStateException {

@@ -2,7 +2,7 @@ package com.dianxin.core.api.commands;
 
 import com.dianxin.core.api.annotations.commands.*;
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
-import com.dianxin.core.api.exceptions.ServiceUnavailableException;
+import com.dianxin.core.api.exceptions.lifecycle.ServiceUnavailableException;
 import com.dianxin.core.api.meta.BotMeta;
 import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.JDA;
@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.build.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

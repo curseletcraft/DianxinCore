@@ -1,4 +1,4 @@
-package com.dianxin.core.api.exceptions;
+package com.dianxin.core.api.exceptions.java;
 
 @SuppressWarnings("unused")
 public class EmptyStringException extends IllegalStateException {

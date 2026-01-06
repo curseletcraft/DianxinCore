@@ -5,7 +5,7 @@ import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
 import com.dianxin.core.api.annotations.core.UsingLikeBukkitLogback;
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
-import com.dianxin.core.api.exceptions.ServiceUnavailableException;
+import com.dianxin.core.api.exceptions.lifecycle.ServiceUnavailableException;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
 import com.dianxin.core.api.handler.console.example.StopConsoleCommand;
 import com.dianxin.core.api.meta.BotMeta;
