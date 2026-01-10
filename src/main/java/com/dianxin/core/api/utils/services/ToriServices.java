@@ -86,6 +86,14 @@ public final class ToriServices {
         return jda.getInviteUrl(permissions);
     }
 
+    public static void shutdown() {
+        if(jda == null || bot == null) {
+            throw new ServiceUnavailableException("ToriServices is not initialized!");
+        }
+        // TODO add scheduler shutdown
+        bot.onShutdown();
+    }
+
     // others
     public static String getToriServiceApiVersion() {
         return TORI_SERVICE_API_VERSION;

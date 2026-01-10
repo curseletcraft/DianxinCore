@@ -218,7 +218,7 @@ public abstract class JavaDiscordBot {
 
         /*
          * Shutdown các task khác ngoại trừ bot.onShutdown()
-         * Xem {@link InternalServer#shutdown()}
+         * Xem {@link ToriServices#shutdown()}
          */
         // DianxinCore.getServer().getScheduler().shutdown();
 
