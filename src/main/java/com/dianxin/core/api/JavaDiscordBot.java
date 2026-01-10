@@ -1,9 +1,5 @@
 package com.dianxin.core.api;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
-import com.dianxin.core.api.annotations.core.UsingLikeBukkitLogback;
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.exceptions.lifecycle.ServiceUnavailableException;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
@@ -21,15 +17,9 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.EnumSet;
 
 /**
@@ -120,7 +110,6 @@ public abstract class JavaDiscordBot {
      * @param meta    Meta bot.
      */
     public JavaDiscordBot(String token, @NotNull BotMeta meta) {
-        trySetupBukkitLikeLogback();
         this.botToken = token;
 
         this.meta = meta;
@@ -311,44 +300,6 @@ public abstract class JavaDiscordBot {
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException("Error invoking @" + ann.getSimpleName(), e);
             }
-        }
-    }
-
-    private void trySetupBukkitLikeLogback() {
-        UsingLikeBukkitLogback ann = this.getClass().getAnnotation(UsingLikeBukkitLogback.class);
-        if (ann == null) return;
-
-        String basePackage = ann.basePackage();
-
-        Path logbackFile = Paths.get("logback.xml");
-
-        if (Files.notExists(logbackFile)) {
-            try (InputStream in = getClass().getClassLoader().getResourceAsStream("logback-template.xml")) {
-                if (in == null) {
-                    throw new IllegalStateException("Không tìm thấy logback-template.xml trong API");
-                }
-                String xml = new String(
-                        in.readAllBytes(),
-                        StandardCharsets.UTF_8).replace("${BASE_PACKAGE}", basePackage);
-                Files.writeString(logbackFile, xml);
-            } catch (IOException e) {
-                throw new RuntimeException("Không thể tạo logback.xml", e);
-            }
-        }
-        reloadLogback(); // reload logback
-    }
-
-    private void reloadLogback() {
-        LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
-        context.reset();
-
-        JoranConfigurator configurator = new JoranConfigurator();
-        configurator.setContext(context);
-
-        try {
-            configurator.doConfigure("logback.xml");
-        } catch (JoranException e) {
-            throw new RuntimeException("Load logback.xml thất bại", e);
         }
     }
 }
