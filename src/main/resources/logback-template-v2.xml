@@ -1,0 +1,51 @@
+<configuration>
+    <!-- ===== LOG LEVEL CONFIG ===== -->
+    <!-- Log level chung cho toàn bot -->
+    <property name="LOG_LEVEL" value="${LOG_LEVEL:-INFO}" />
+
+    <!-- Log level riêng cho core (optional) -->
+    <property name="CORE_LOG_LEVEL" value="${CORE_LOG_LEVEL:-${LOG_LEVEL}}" />
+
+    <!-- ===== LOG BASIC CONFIG ===== -->
+    <property name="LOG_DIR" value="logs" />
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n" />
+
+    <!-- ===== CONSOLE ===== -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ===== FILE (ROLLING DAILY) ===== -->
+    <appender name="DAILY_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/log-latest.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ===== ROOT LOGGER ===== -->
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_LOG" />
+    </root>
+
+    <!-- ===== CORE PACKAGE (YOUR FRAMEWORK) ===== -->
+    <logger name="com.dianxin.core"
+            level="${CORE_LOG_LEVEL}"
+            additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DAILY_LOG" />
+    </logger>
+
+</configuration>
