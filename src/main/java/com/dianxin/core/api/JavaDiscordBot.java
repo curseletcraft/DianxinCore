@@ -1,7 +1,7 @@
 package com.dianxin.core.api;
 
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
-import com.dianxin.core.api.exceptions.lifecycle.ServiceUnavailableException;
+import com.dianxin.core.fastutil.exceptions.ServiceUnavailableException;
 import com.dianxin.core.api.handler.console.ConsoleCommandManager;
 import com.dianxin.core.api.handler.console.example.StopConsoleCommand;
 import com.dianxin.core.api.meta.BotMeta;

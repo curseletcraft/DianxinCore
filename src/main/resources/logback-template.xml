@@ -36,7 +36,7 @@
     </root>
 
     <!-- Optional: specific package -->
-    <logger name="${BASE_PACKAGE}" level="DEBUG" additivity="false">
+    <logger name="${BASE_PACKAGE}" level="DEBUG" additivity="false"> <!-- change main package here -->
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="DAILY_LOG" />
     </logger>

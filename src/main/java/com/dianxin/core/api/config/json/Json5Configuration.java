@@ -16,6 +16,7 @@ import java.nio.file.Files;
  * @deprecated Use {@link Json5GenericConfiguration} instead.
  */
 @Deprecated
+@SuppressWarnings("all")
 public class Json5Configuration {
     private AbstractBotConfiguration botConfig;
     private final Logger logger = LoggerFactory.getLogger(Json5Configuration.class);

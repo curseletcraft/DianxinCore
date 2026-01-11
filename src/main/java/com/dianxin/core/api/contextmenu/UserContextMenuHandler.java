@@ -2,8 +2,8 @@ package com.dianxin.core.api.contextmenu;
 
 import com.dianxin.core.api.JavaDiscordBot;
 import com.dianxin.core.api.annotations.contextmenu.ContextMenu;
-import com.dianxin.core.api.exceptions.InvalidRegistrationNameException;
-import com.dianxin.core.api.exceptions.annotation.MissingAnnotationException;
+import com.dianxin.core.fastutil.exceptions.InvalidRegistrationNameException;
+import com.dianxin.core.fastutil.exceptions.MissingAnnotationException;
 import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.command.UserContextInteractionEvent;

@@ -1,4 +1,4 @@
-//public interface FileConfiguration {
+//  spublic interface FileConfiguration {
 //    void saveDefaultConfig();
 //
 //    void save(File file) throws IOException;
@@ -86,7 +86,8 @@ import java.util.List;
  * }
  * </code></pre>
  */
-@ApiStatus.AvailableSince("1.2")
+@ApiStatus.Experimental
+@SuppressWarnings("unused")
 public interface FileConfiguration {
 
     /**

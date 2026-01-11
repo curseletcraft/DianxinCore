@@ -2,7 +2,7 @@ package com.dianxin.core.api.commands;
 
 import com.dianxin.core.api.annotations.commands.*;
 import com.dianxin.core.api.annotations.lifecycle.RegisterToriService;
-import com.dianxin.core.api.exceptions.lifecycle.ServiceUnavailableException;
+import com.dianxin.core.fastutil.exceptions.ServiceUnavailableException;
 import com.dianxin.core.api.meta.BotMeta;
 import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.JDA;

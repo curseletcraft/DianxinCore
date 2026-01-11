@@ -1,5 +1,6 @@
 package com.dianxin.core.api.config.env;
 
+import com.dianxin.core.fastutil.exceptions.UtilityClassInitializationException;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
@@ -14,7 +15,9 @@ public class VirtualEnvironmentConfiguration {
         return Dotenv.configure().directory(dir).ignoreIfMissing().load();
     }
 
-    private VirtualEnvironmentConfiguration() {}
+    private VirtualEnvironmentConfiguration() {
+        throw new UtilityClassInitializationException(VirtualEnvironmentConfiguration.class);
+    }
 
     @Nullable
     public static String get(String key) {

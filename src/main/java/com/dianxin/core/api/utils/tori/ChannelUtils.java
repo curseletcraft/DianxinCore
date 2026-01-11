@@ -1,7 +1,7 @@
 package com.dianxin.core.api.utils.tori;
 
 import com.dianxin.core.api.JavaDiscordBot;
-import com.dianxin.core.api.exceptions.lifecycle.ServiceUnavailableException;
+import com.dianxin.core.fastutil.exceptions.ServiceUnavailableException;
 import com.dianxin.core.api.utils.services.ToriServices;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.Channel;
