@@ -7,7 +7,8 @@ package com.dianxin.core.fastutil.utils;
  * <b>[VN]</b> Lớp tiện ích để xử lý việc định dạng và phân tích thời gian.<br>
  * Chủ yếu được sử dụng cho các tính năng phát phương tiện như tua (seek) và hiển thị thời lượng.
  */
-public class TimeUtils {
+@SuppressWarnings("unused")
+public final class TimeUtils {
 
     /**
      * <b>[EN]</b> Formats a duration in milliseconds into a human-readable string.<br>

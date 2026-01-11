@@ -1,13 +1,16 @@
 package com.dianxin.core.fastutil.utils;
 
+import com.dianxin.core.fastutil.exceptions.UtilityClassInitializationException;
+
 import java.awt.Color;
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public final class ColorUtil {
     private static final Random RANDOM = new Random();
 
     private ColorUtil() {
-        throw new UnsupportedOperationException(ColorUtil.class.getName() + " utility class cannot be initialized!");
+        throw new UtilityClassInitializationException(ColorUtil.class);
     }
 
     /**

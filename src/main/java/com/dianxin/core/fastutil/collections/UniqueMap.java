@@ -2,6 +2,7 @@ package com.dianxin.core.fastutil.collections;
 
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public interface UniqueMap<K, V> {
     void putUnique(K key, V value);
 

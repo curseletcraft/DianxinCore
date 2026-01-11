@@ -1,5 +1,9 @@
 package com.dianxin.core.fastutil.utils;
 
+import org.jetbrains.annotations.ApiStatus;
+
+@SuppressWarnings("unused")
+@ApiStatus.Experimental
 public final class Checks {
     public static void notNull(Object arg, String name) {
         if (arg == null) {
