@@ -1,6 +1,6 @@
-package com.dianxin.core.fastutil.utils;
+package com.dianxin.core.api.utils;
 
-import com.dianxin.core.fastutil.exceptions.UtilityClassInitializationException;
+import com.dianxin.core.api.exceptions.UtilityClassInitializationException;
 
 import java.awt.Color;
 import java.util.Random;

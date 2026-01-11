@@ -1,6 +1,6 @@
 package com.dianxin.core.jda.utils.lifecycle;
 
-import com.dianxin.core.fastutil.exceptions.ServiceUnavailableException;
+import com.dianxin.core.api.exceptions.ServiceUnavailableException;
 import net.dv8tion.jda.api.JDAInfo;
 
 import java.util.Arrays;

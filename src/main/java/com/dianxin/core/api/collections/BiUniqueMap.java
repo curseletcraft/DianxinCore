@@ -1,4 +1,4 @@
-package com.dianxin.core.fastutil.collections;
+package com.dianxin.core.api.collections;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.dianxin.core.jda.config.env;
 
-import com.dianxin.core.fastutil.exceptions.UtilityClassInitializationException;
+import com.dianxin.core.api.exceptions.UtilityClassInitializationException;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;

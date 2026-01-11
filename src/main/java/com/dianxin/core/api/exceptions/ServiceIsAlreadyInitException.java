@@ -1,4 +1,4 @@
-package com.dianxin.core.fastutil.exceptions;
+package com.dianxin.core.api.exceptions;
 
 @SuppressWarnings("unused")
 public class ServiceIsAlreadyInitException extends IllegalStateException {

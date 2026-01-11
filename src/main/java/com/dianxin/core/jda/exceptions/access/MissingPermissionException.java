@@ -1,6 +1,6 @@
 package com.dianxin.core.jda.exceptions.access;
 
-import com.dianxin.core.fastutil.exceptions.AccessDeniedException;
+import com.dianxin.core.api.exceptions.AccessDeniedException;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.Arrays;

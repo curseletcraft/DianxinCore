@@ -1,4 +1,4 @@
-package com.dianxin.core.fastutil.exceptions;
+package com.dianxin.core.api.exceptions;
 
 public class AccessDeniedException extends RuntimeException {
     public AccessDeniedException(String message) {

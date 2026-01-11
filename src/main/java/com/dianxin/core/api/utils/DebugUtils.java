@@ -1,4 +1,4 @@
-package com.dianxin.core.fastutil.utils;
+package com.dianxin.core.api.utils;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;

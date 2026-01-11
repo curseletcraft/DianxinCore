@@ -1,4 +1,4 @@
-package com.dianxin.core.fastutil.exceptions;
+package com.dianxin.core.api.exceptions;
 
 import org.jetbrains.annotations.NotNull;
 

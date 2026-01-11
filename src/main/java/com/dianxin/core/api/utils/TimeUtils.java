@@ -1,4 +1,4 @@
-package com.dianxin.core.fastutil.utils;
+package com.dianxin.core.api.utils;
 
 /**
  * <b>[EN]</b> Utility class for handling time formatting and parsing.<br>
