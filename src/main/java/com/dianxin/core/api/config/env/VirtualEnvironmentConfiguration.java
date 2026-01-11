@@ -1,4 +1,4 @@
-package com.dianxin.core.jda.config.env;
+package com.dianxin.core.api.config.env;
 
 import com.dianxin.core.api.exceptions.UtilityClassInitializationException;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -7,7 +7,7 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 @SuppressWarnings("unused")
-public class VirtualEnvironmentConfiguration {
+public final class VirtualEnvironmentConfiguration {
     private static final Dotenv dotenv = VirtualEnvironmentConfiguration.load();
 
     private static Dotenv load() {

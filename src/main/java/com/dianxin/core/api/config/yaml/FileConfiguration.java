@@ -42,7 +42,7 @@
 //    Set<String> getKeys(boolean deep);
 //    Map<String, Object> getValues(boolean deep);
 //}
-package com.dianxin.core.jda.config.yaml;
+package com.dianxin.core.api.config.yaml;
 
 import org.jetbrains.annotations.ApiStatus;
 

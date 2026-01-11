@@ -1,4 +1,4 @@
-package com.dianxin.core.jda.config.json;
+package com.dianxin.core.api.config.json;
 
 import org.apache.juneau.annotation.Bean;
 
