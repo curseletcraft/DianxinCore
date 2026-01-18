@@ -7,7 +7,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public final class Actions {
-
     private Actions() {
         throw new UtilityClassInitializationException(Actions.class);
     }
