@@ -1,11 +1,10 @@
 package com.dianxin.core.api.concurrent;
 
-import net.dv8tion.jda.internal.entities.GuildImpl;
-
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public interface IAction<T> {
     /**
      * Thực thi action bất đồng bộ.
@@ -37,4 +36,15 @@ public interface IAction<T> {
      * @return IAction mới
      */
     IAction<T> runAsync(Executor executor);
+
+    /**
+     * Blocks the current thread until the action completes.
+     *
+     * <p><b>WARNING:</b> This method blocks the calling thread.
+     * It must NOT be called from event loops, schedulers,
+     * or other performance-critical threads.</p>
+     *
+     * @return result of the action
+     */
+    T complete();
 }

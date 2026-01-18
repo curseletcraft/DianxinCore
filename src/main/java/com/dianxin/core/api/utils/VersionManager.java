@@ -103,6 +103,17 @@ public final class VersionManager {
     }
 
     /**
+     * Ensures that the current Java version meets the required minimum version.
+     *
+     * @param requiredVersion the minimum required Java version
+     * @throws UnsupportedOperationException if the Java version is incompatible
+     */
+    public static void requireJavaVersion(int requiredVersion, boolean shutdown) {
+        requireJavaVersion(requiredVersion);
+        if(shutdown) System.exit(-1);
+    }
+
+    /**
      * Checks whether the current Java version falls within the given range.
      *
      * @param min minimum Java version (inclusive)

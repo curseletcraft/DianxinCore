@@ -5,6 +5,7 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class FutureAction<T> implements IAction<T> {
     private final CompletableFuture<T> future;
 
@@ -34,5 +35,10 @@ public class FutureAction<T> implements IAction<T> {
     @Override
     public IAction<T> runAsync(Executor executor) {
         return new FutureAction<>(future.thenApplyAsync(Function.identity(), executor));
+    }
+
+    @Override
+    public T complete() {
+        return future.join();
     }
 }

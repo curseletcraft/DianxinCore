@@ -1,9 +1,10 @@
 package com.dianxin.core.api.config.env;
 
+import com.dianxin.core.api.annotations.NullMarked;
 import com.dianxin.core.api.exceptions.UtilityClassInitializationException;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.jetbrains.annotations.Nullable;
-import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.NonNull;
 
 @NullMarked
 @SuppressWarnings("unused")
@@ -36,6 +37,6 @@ public final class VirtualEnvironmentConfiguration {
         if (value == null) {
             throw new EnvVariableNotFoundException(key);
         }
-        return value;
+        return null;
     }
 }
