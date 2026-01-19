@@ -1,0 +1,6 @@
+jdk:
+  - openjdk21
+
+# Lệnh build (Bỏ qua test cho nhanh và bỏ qua javadoc nếu không cần)  -DskipTests -Dmaven.javadoc.skip=true
+install:
+  - mvn clean install -DskipTests
