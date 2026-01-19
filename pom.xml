@@ -102,7 +102,7 @@
         <dependency>
             <groupId>org.apache.juneau</groupId>
             <artifactId>juneau-marshall</artifactId>
-            <version>9.1.0</version>
+            <version>9.2.0</version>
         </dependency>
 
         <!-- https://central.sonatype.com/artifact/io.github.cdimascio/dotenv-java?smo=true -->
