@@ -1,0 +1,38 @@
+name: Build & Release DianxinCore
+
+# Workflow này sẽ chạy khi bạn tạo một Release mới trên GitHub
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Cấp quyền ghi để upload file vào Release
+
+    steps:
+      # 1. Tải source code về máy ảo
+      - uses: actions/checkout@v4
+
+      # 2. Cài đặt Java 21 (Phiên bản bạn đang dùng)
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven # Cache lại thư viện để lần sau build nhanh hơn
+
+      # 3. Chạy lệnh Build (Bỏ qua test để build cho nhanh, nếu muốn test thì bỏ -DskipTests)
+      - name: Build with Maven
+        run: mvn -B package -DskipTests --file pom.xml
+
+      # 4. Tìm và Upload file JAR vào Release vừa tạo
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          # Upload tất cả file .jar trong thư mục target/ (Trừ file sources hoặc javadoc nếu ko muốn)
+          files: target/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
