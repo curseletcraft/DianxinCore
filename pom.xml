@@ -33,11 +33,11 @@
 <!--            <scope>test</scope>-->
 <!--        </dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/net.dv8tion/JDA -->
+        <!-- Source: https://mvnrepository.com/artifact/net.dv8tion/JDA -->
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>6.2.1</version>
+            <version>6.3.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
