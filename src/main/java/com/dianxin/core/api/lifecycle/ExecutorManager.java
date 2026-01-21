@@ -37,8 +37,16 @@ public final class ExecutorManager {
      */
     public static void initialize() {
         if (INITIALIZED.compareAndSet(false, true)) {
-            // Sử dụng Builder để tạo instance, thay thế ExecutorFactory cũ
             ExecutorBuilder builder = new ExecutorBuilder();
+            IO_EXECUTOR = builder.io();
+            CPU_EXECUTOR = builder.cpu();
+        }
+    }
+
+    // phương thức mới, overload cái cũ
+    public static void initialize(ExecutorService io, ExecutorService cpu) {
+        if (INITIALIZED.compareAndSet(false, true)) {
+            ExecutorBuilder builder = new ExecutorBuilder(io, cpu);
             IO_EXECUTOR = builder.io();
             CPU_EXECUTOR = builder.cpu();
         }

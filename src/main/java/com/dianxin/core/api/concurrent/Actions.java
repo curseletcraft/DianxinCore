@@ -1,11 +1,14 @@
 package com.dianxin.core.api.concurrent;
 
 import com.dianxin.core.api.exceptions.UtilityClassInitializationException;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
+@Deprecated(since = "1.2.0-M3", forRemoval = true)
+@ApiStatus.ScheduledForRemoval(inVersion = "2.0")
 public final class Actions {
     private Actions() {
         throw new UtilityClassInitializationException(Actions.class);

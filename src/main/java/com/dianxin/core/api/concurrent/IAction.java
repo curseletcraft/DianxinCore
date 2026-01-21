@@ -1,5 +1,7 @@
 package com.dianxin.core.api.concurrent;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -47,4 +49,26 @@ public interface IAction<T> {
      * @return result of the action
      */
     T complete();
+
+    public static <T> IAction<T> supplyAsync(Callable<T> task, Executor executor) { // Executor có thể dùng ExecutorService từ ExecutorManager ban nãy
+        return new FutureAction<>(
+                CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return task.call();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }, executor)
+        );
+    }
+
+    public static IAction<Void> runAsync(Runnable task, Executor executor) {
+        return new FutureAction<>(CompletableFuture.runAsync(() -> {
+            try {
+                task.run();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }, executor));
+    }
 }
