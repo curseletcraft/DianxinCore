@@ -1,11 +1,18 @@
 package com.dianxin.core.api.concurrent;
 
 import com.dianxin.core.api.exceptions.UtilityClassInitializationException;
+import com.dianxin.core.api.lifecycle.ExecutorManager;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Sử dụng {@link ExecutorManager#initialize()} và ExecutorManager.ExecutorBuilder static class để thay thế
+ */
+@Deprecated(since = "1.2.0-M3", forRemoval = true)
+@ApiStatus.ScheduledForRemoval(inVersion = "2.0")
 public final class ExecutorFactory {
     private ExecutorFactory() {
         throw new UtilityClassInitializationException(ExecutorFactory.class);
