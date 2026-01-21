@@ -22,5 +22,15 @@ public final class Actions {
                 }, executor)
         );
     }
+
+    public static IAction<Void> runAsync(Runnable task, Executor executor) {
+        return new FutureAction<>(CompletableFuture.runAsync(() -> {
+            try {
+                task.run();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }, executor));
+    }
 }
 
