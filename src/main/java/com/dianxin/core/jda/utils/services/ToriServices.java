@@ -1,5 +1,6 @@
 package com.dianxin.core.jda.utils.services;
 
+import com.dianxin.core.api.lifecycle.ExecutorManager;
 import com.dianxin.core.jda.JavaDiscordBot;
 import com.dianxin.core.jda.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.exceptions.ServiceUnavailableException;
@@ -8,7 +9,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
 public final class ToriServices {
@@ -18,7 +18,7 @@ public final class ToriServices {
     private static boolean initialized = false;
 
     private static JavaDiscordBot bot;
-    @Nullable private static JDA jda;
+    private static JDA jda;
 
     private ToriServices() {
         throw new UnsupportedOperationException("ToriServices is a bootstrap class");
@@ -36,6 +36,8 @@ public final class ToriServices {
         RegisterToriService ann = bot.getClass().getAnnotation(RegisterToriService.class);
         if(ann == null) return;
 
+        if(ann.registerScheduler()) ExecutorManager.initialize(); // khởi tạo executor manager
+
         initialized = true;
     }
 
@@ -45,52 +47,52 @@ public final class ToriServices {
      * @throws ServiceUnavailableException nếu bot không được init, hoặc do chưa annotate {@link RegisterToriService}
      */
     public static JavaDiscordBot getBaseBot() {
-        if(jda == null) {
+        if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
         return bot;
     }
 
     public static BotMeta getBotMeta() {
-        if(bot == null) {
+        if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
         return bot.getMeta();
     }
 
     public static JDA getJda() {
-        if(jda == null) {
+        if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
         return jda;
     }
 
     public static User getSelf() {
-        if(jda == null) {
+        if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
         return jda.getSelfUser();
     }
 
     public static String getBotInviteLink() {
-        if(jda == null) {
+        if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
         return jda.getInviteUrl();
     }
 
     public static String getBotInviteLink(Permission... permissions) {
-        if(jda == null) {
+        if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
         return jda.getInviteUrl(permissions);
     }
 
     public static void shutdown() {
-        if(jda == null || bot == null) {
+        if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
-        // TODO add scheduler shutdown
+        // TODO add scheduler shutdown ExecutorManager.shutdown();
         bot.onShutdown();
     }
 

@@ -7,5 +7,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface RegisterToriService {
-    boolean enableIActionScheduler() default true;
+    boolean registerScheduler() default true; // để ToriServices tự init ExecutorManager + scheduler + IAction
 }
