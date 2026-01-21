@@ -6,11 +6,11 @@ import java.awt.Color;
 import java.util.Random;
 
 @SuppressWarnings("unused")
-public final class ColorUtil {
+public final class ColorUtils {
     private static final Random RANDOM = new Random();
 
-    private ColorUtil() {
-        throw new UtilityClassInitializationException(ColorUtil.class);
+    private ColorUtils() {
+        throw new UtilityClassInitializationException(ColorUtils.class);
     }
 
     /**
