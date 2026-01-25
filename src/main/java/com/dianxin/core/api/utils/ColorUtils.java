@@ -79,6 +79,33 @@ public final class ColorUtils {
         return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue()).toUpperCase();
     }
 
+    /**
+     * Chuyển đổi chuỗi Hex (VD: "#FF0000" hoặc "FF0000") sang Color.
+     * @param hexStr Chuỗi màu Hex.
+     * @return Đối tượng Color tương ứng.
+     * @throws IllegalArgumentException Nếu chuỗi null, rỗng hoặc sai định dạng.
+     */
+    public static Color fromHex(String hexStr) {
+        if (hexStr == null || hexStr.trim().isEmpty()) {
+            throw new IllegalArgumentException("Chuỗi Hex không được để trống");
+        }
+
+        String cleanHex = hexStr.trim();
+        if (cleanHex.startsWith("#")) {
+            cleanHex = cleanHex.substring(1);
+        }
+
+        if (cleanHex.length() != 6) {
+            throw new IllegalArgumentException("Mã Hex phải bao gồm 6 ký tự (VD: FF0000). Input: " + hexStr);
+        }
+
+        try {
+            return new Color(Integer.parseInt(cleanHex, 16));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Chuỗi Hex chứa ký tự không hợp lệ: " + hexStr, e);
+        }
+    }
+
     // --- Helper private ---
     private static int randomInRange(int min, int max) {
         if (min == max) return min;

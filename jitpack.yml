@@ -1,3 +1,5 @@
+# ProjectDir/jitpack.yml
+
 jdk:
   - openjdk21
 
