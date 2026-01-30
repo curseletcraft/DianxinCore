@@ -6,7 +6,7 @@
 
     <groupId>com.dianxin.core</groupId>
     <artifactId>DianxinCore</artifactId>
-    <version>1.2.0-M3</version>
+    <version>1.2.0-M4</version>
     <packaging>jar</packaging>
 
     <name>DianxinCore</name>
