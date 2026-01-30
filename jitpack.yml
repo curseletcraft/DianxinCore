@@ -5,4 +5,5 @@ jdk:
 
 # Lệnh build (Bỏ qua test cho nhanh và bỏ qua javadoc nếu không cần)  -DskipTests -Dmaven.javadoc.skip=true
 install:
-  - mvn clean install -DskipTests
+ # - mvn clean install -DskipTests
+  - ./mvnw clean install -DskipTests
