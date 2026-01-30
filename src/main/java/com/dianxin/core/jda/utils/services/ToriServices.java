@@ -13,7 +13,7 @@ import org.jetbrains.annotations.ApiStatus;
 @SuppressWarnings("unused")
 public final class ToriServices {
     private static final String TORI_SERVICE_API_VERSION = "4";
-    private static final String TORI_SERVICES_VERSION = "1.2.0-M4";
+    private static final String TORI_SERVICES_VERSION = "1.2.0-M5";
 
     private static boolean initialized = false;
 
