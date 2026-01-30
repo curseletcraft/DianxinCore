@@ -1,0 +1,49 @@
+{
+  name: "testcommand",
+  description: "Test command", // Mô tả
+  options: [
+    {
+      type: "int", // số
+      name: "arg1",
+      description: "Description for option #1",
+      required: true,
+      min: 10, // giá trị nhỏ nhất
+      max: 50 // giá trị lớn nhất
+    }, {
+      type: "string",
+      name: "arg2",
+      description: "Description for option #2",
+      required: false,
+      minLength: 10,
+      maxLength: 50,
+      choices: [
+        { key: "es", value: "Espanol" },
+        { key: "vi", value: "Vietnamese" },
+        { key: "en", value: "English"}
+      ]
+    }
+  ],
+  actions: {
+    embed: true,
+    textReply: "", // nếu embed để true thì text reply có thể để trống cho gọn
+    embedData: {
+      "title": "📊 Thông tin người chơi",
+      "url": "",
+      "timestamp": "%current_timestamp%",
+      "color": "%random_color%",
+      "thumbnail": "https://visage.surgeplay.com/face/256/{name}.png",
+      "image": "",
+      "authorName": "",
+      "authorUrl": "",
+      "iconUrl": "",
+      "description": "👤 Tên: {name}\n🏷 Rank: {rank}\n💰 Tiền: {money_formatted}\n⭐ Level: {level}\n⚔ Kills: {kills}\n☠ Deaths: {deaths}\n🏰 Clan: {clan}\n📅 First join: {first_join}\n🕒 Last seen: {last_seen}",
+      "footer": "BBinVerse • Player Info",
+      "footerUrl": "",
+      "fields": [
+        { key: "es", value: "Espanol" },
+        { key: "vi", value: "Vietnamese" },
+        { key: "en", value: "English"}
+      ]
+    }
+  }
+}
