@@ -1,3 +1,5 @@
+# {DianxinCore-project-root}/.github/workflows/maven-release.yml
+
 name: Build & Release DianxinCore
 
 # Workflow này sẽ chạy khi bạn tạo một Release mới trên GitHub
