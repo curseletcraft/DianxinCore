@@ -18,9 +18,6 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.EnumSet;
 
 /**
@@ -296,23 +293,5 @@ public abstract class JavaDiscordBot {
      */
     public ConsoleCommandManager getConsoleManager() {
         return consoleManager;
-    }
-
-    private void invokeLifecycleAnnotation(Class<? extends Annotation> ann) {
-        for (Method method : getClass().getDeclaredMethods()) {
-            if (!method.isAnnotationPresent(ann)) continue;
-
-            if (method.getParameterCount() != 0) {
-                throw new IllegalStateException(
-                        "@" + ann.getSimpleName() + " method must have no params: " + method.getName());
-            }
-
-            try {
-                method.setAccessible(true);
-                method.invoke(this);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException("Error invoking @" + ann.getSimpleName(), e);
-            }
-        }
     }
 }
