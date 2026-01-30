@@ -10,6 +10,7 @@ import com.dianxin.core.jda.utils.lifecycle.VersionController;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.audio.AudioModuleConfig;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -147,6 +148,7 @@ public abstract class JavaDiscordBot {
         JDABuilder jdaBuilder;
         EnumSet<GatewayIntent> intents = getIntents();
         Activity activity = getActivity();
+        AudioModuleConfig audioModuleConfig = getAudioModuleConfig();
 
         if(intents == null) {
             logger.warn("⚠️ Bot {} không có GatewayIntents — có thể sẽ không nhận được event nào.", botName);
@@ -157,6 +159,10 @@ public abstract class JavaDiscordBot {
 
         if(activity != null) {
             jdaBuilder.setActivity(activity);
+        }
+
+        if(audioModuleConfig != null) {
+            jdaBuilder.setAudioModuleConfig(audioModuleConfig);
         }
 
         this.jda = jdaBuilder
@@ -242,6 +248,13 @@ public abstract class JavaDiscordBot {
     protected Activity getActivity() {
         return null;
     }
+
+    /**
+     * Provides dave session if available.
+     *
+     * @return A AudioModuleConfig.
+     */
+    protected AudioModuleConfig getAudioModuleConfig() { return null; }
 
     /**
      * Override this to register custom console commands using {@link ConsoleCommandManager}.
