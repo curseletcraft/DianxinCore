@@ -1,6 +1,7 @@
 package com.dianxin.core.api.utils.example;
 
 import com.dianxin.core.api.utils.EmbeddedObjectUtils;
+import com.dianxin.core.api.utils.EntityString;
 import org.jspecify.annotations.NonNull;
 
 import java.time.LocalDateTime;
@@ -40,6 +41,22 @@ public record StaticPlayerStats(
                 "totalExpLevels", totalExpLevels,
                 "placeholders", placeholdersStr
         );
+    }
+
+    // @Override
+    public String toString2() {
+        return new EntityString(this)
+                .add("name", name)
+                .add("kills", kills)
+                .add("deaths", deaths)
+                // Format ngày tháng trực tiếp ở đây hoặc để Utils tự lo
+                .add("firstJoin", firstJoin)
+                .add("lastJoin", lastJoin)
+                .add("level", level)
+                .add("totalExp", totalExpLevels)
+                // Map placeholders có thể add thẳng object, nó sẽ gọi toString của Map
+                .add("placeholders", placeholders)
+                .toString();
     }
 
     // Nếu bạn muốn override cả equals/hashCode (dù record đã có sẵn)
