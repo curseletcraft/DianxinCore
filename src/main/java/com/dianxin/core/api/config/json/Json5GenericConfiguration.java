@@ -16,7 +16,7 @@ import java.nio.file.Files;
  *
  * @param <T> Kiểu config cụ thể, phải kế thừa AbstractBotConfiguration
  */
-@SuppressWarnings({"ResultOfMethodCallIgnored", "unused"})
+@SuppressWarnings({"ResultOfMethodCallIgnored", "unused", "RedundantThrows"})
 public class Json5GenericConfiguration<T extends AbstractBotConfiguration> {
     private final Logger logger = LoggerFactory.getLogger(Json5GenericConfiguration.class);
 
@@ -64,7 +64,7 @@ public class Json5GenericConfiguration<T extends AbstractBotConfiguration> {
     }
 
     /** Reload config từ file JSON5 */
-    public void reloadConfig() {
+    public void reloadConfig() throws IOException {
         try {
             String json5 = Files.readString(configFile.toPath(), StandardCharsets.UTF_8);
             this.botConfig = Json5.to(json5, clazz);
@@ -75,7 +75,7 @@ public class Json5GenericConfiguration<T extends AbstractBotConfiguration> {
     }
 
     /** Lưu config hiện tại ra file JSON5 */
-    public void saveConfig() {
+    public void saveConfig() throws IOException {
         try {
             String json5 = Json5.of(botConfig);
             Files.writeString(configFile.toPath(), json5, StandardCharsets.UTF_8);
