@@ -69,6 +69,8 @@ import java.util.EnumSet;
 @SuppressWarnings("unused")
 public abstract class JavaDiscordBot {
 
+    private static JavaDiscordBot instance;
+
     /**
      * The JDA instance representing the bot connection.
      */
@@ -108,8 +110,13 @@ public abstract class JavaDiscordBot {
      * @param meta    Meta bot.
      */
     public JavaDiscordBot(String token, @NotNull BotMeta meta) {
-        this.botToken = token;
+        if (instance != null) {
+            // Chặn việc tạo 2 con bot cùng lúc (Singleton)
+            throw new IllegalStateException("Không thể khởi tạo 2 instance của JavaDiscordBot!");
+        }
+        instance = this;
 
+        this.botToken = token;
         this.meta = meta;
         this.botName = meta.getBotName();
         this.logger = LoggerFactory.getLogger(this.getClass());
@@ -138,7 +145,7 @@ public abstract class JavaDiscordBot {
             return;
         }
 
-        this.getConsoleManager().register(new StopConsoleCommand(this));
+        this.getConsoleManager().register(new StopConsoleCommand());
 
         started = true;
 
@@ -293,5 +300,18 @@ public abstract class JavaDiscordBot {
      */
     public ConsoleCommandManager getConsoleManager() {
         return consoleManager;
+    }
+
+    /**
+     * Lấy instance của bot hiện tại.
+     * Tự động ép kiểu về class con (ví dụ AjaxBot).
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends JavaDiscordBot> T getJavaDiscordBot() {
+        if (instance == null) {
+            throw new IllegalStateException("Bot chưa được khởi tạo! Hãy gọi new Bot() trước.");
+        }
+        // Ép kiểu instance cha về kiểu con T
+        return (T) instance;
     }
 }

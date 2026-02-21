@@ -5,16 +5,13 @@ import com.dianxin.core.jda.handler.console.AbstractConsoleCommand;
 
 @SuppressWarnings("unused")
 public class StopConsoleCommand extends AbstractConsoleCommand {
-    private final JavaDiscordBot bot; // hoặc bot con
-
-    public StopConsoleCommand(JavaDiscordBot bot) {
+    public StopConsoleCommand() {
         super("stop");
-        this.bot = bot;
     }
 
     @Override
     public void execute(String[] args) {
-        bot.onShutdown();
+        JavaDiscordBot.getJavaDiscordBot().onShutdown();
         System.exit(0);
     }
 }
