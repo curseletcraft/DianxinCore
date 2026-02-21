@@ -71,7 +71,9 @@ public interface ResultedAction<T> {
     // =========================================================================
 
     enum ActionStatus {
-        SUCCESS, FAILURE, WAITING;
+        SUCCESS,
+        FAILURE,
+        WAITING;
     }
 
     class ActionResult<T> {

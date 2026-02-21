@@ -9,7 +9,6 @@ import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-// TODO rename class to IActionImpl
 public class IActionImpl<T> implements IAction<T> {
 
     private final CompletableFuture<T> future;
