@@ -9,12 +9,13 @@ import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class FutureAction<T> implements IAction<T> {
+// TODO rename class to IActionImpl
+public class IActionImpl<T> implements IAction<T> {
 
     private final CompletableFuture<T> future;
-    private final Logger logger = LoggerFactory.getLogger(FutureAction.class);
+    private final Logger logger = LoggerFactory.getLogger(IActionImpl.class);
 
-    public FutureAction(CompletableFuture<T> future) {
+    public IActionImpl(CompletableFuture<T> future) {
         this.future = future;
     }
 
@@ -64,26 +65,26 @@ public class FutureAction<T> implements IAction<T> {
 
     @Override
     public <U> @NotNull IAction<U> map(@NotNull Function<T, U> mapper) {
-        return new FutureAction<>(future.thenApply(mapper));
+        return new IActionImpl<>(future.thenApply(mapper));
     }
 
     @Override
     public <U> @NotNull IAction<U> flatMap(@NotNull Function<T, IAction<U>> mapper) {
         // Đây là phép thuật của chaining
         // thenCompose cho phép nối 1 CompletableFuture với 1 CompletableFuture khác
-        return new FutureAction<>(future.thenCompose(result ->
+        return new IActionImpl<>(future.thenCompose(result ->
                 mapper.apply(result).submit() // Chuyển IAction về CompletableFuture
         ));
     }
 
     @Override
     public @NotNull IAction<T> onErrorReturn(T fallback) {
-        return new FutureAction<>(future.exceptionally(ex -> fallback));
+        return new IActionImpl<>(future.exceptionally(ex -> fallback));
     }
 
     @Override
     public @NotNull IAction<T> onExecutor(@NotNull Executor executor) {
         // Chuyển kết quả sang xử lý ở executor mới
-        return new FutureAction<>(future.thenApplyAsync(Function.identity(), executor));
+        return new IActionImpl<>(future.thenApplyAsync(Function.identity(), executor));
     }
 }

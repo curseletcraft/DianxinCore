@@ -15,7 +15,7 @@ public final class Actions {
     }
 
     public static <T> IAction<T> supplyAsync(Callable<T> task, Executor executor) {
-        return new FutureAction<>(
+        return new IActionImpl<>(
                 CompletableFuture.supplyAsync(() -> {
                     try {
                         return task.call();
@@ -27,7 +27,7 @@ public final class Actions {
     }
 
     public static IAction<Void> runAsync(Runnable task, Executor executor) {
-        return new FutureAction<>(CompletableFuture.runAsync(() -> {
+        return new IActionImpl<>(CompletableFuture.runAsync(() -> {
             try {
                 task.run();
             } catch (Exception e) {

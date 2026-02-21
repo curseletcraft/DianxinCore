@@ -21,7 +21,7 @@ import java.util.function.Supplier;
  * <p>
  * Class này Thread-safe và chỉ nên được khởi tạo một lần duy nhất thông qua {@link #initialize()}.
  */
-@SuppressWarnings("ClassCanBeRecord")
+@SuppressWarnings({"ClassCanBeRecord", "unused"})
 public final class ExecutorManager {
     private static ExecutorService IO_EXECUTOR;
     private static ExecutorService CPU_EXECUTOR;

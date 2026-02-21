@@ -152,7 +152,7 @@ public interface IAction<T> {
      */
     static <T> IAction<T> supplyAsync(@NotNull Callable<T> task, @Nullable Executor executor) {
         Executor exec = (executor != null) ? executor : ExecutorManager.io();
-        return new FutureAction<>(CompletableFuture.supplyAsync(() -> {
+        return new IActionImpl<>(CompletableFuture.supplyAsync(() -> {
             try {
                 return task.call();
             } catch (Exception e) {
@@ -167,7 +167,7 @@ public interface IAction<T> {
      */
     static IAction<Void> runAsync(@NotNull Runnable task, @Nullable Executor executor) {
         Executor exec = (executor != null) ? executor : ExecutorManager.io();
-        return new FutureAction<>(CompletableFuture.runAsync(() -> {
+        return new IActionImpl<>(CompletableFuture.runAsync(() -> {
             try {
                 task.run();
             } catch (Exception e) {
@@ -180,6 +180,6 @@ public interface IAction<T> {
      * Tạo một IAction đã hoàn thành sẵn với giá trị cố định.
      */
     static <T> IAction<T> completed(T value) {
-        return new FutureAction<>(CompletableFuture.completedFuture(value));
+        return new IActionImpl<>(CompletableFuture.completedFuture(value));
     }
 }
