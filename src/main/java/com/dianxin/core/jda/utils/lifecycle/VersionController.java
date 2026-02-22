@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.JDAInfo;
 import java.util.Arrays;
 
 public final class VersionController {
-    private static final String REQUIRED_JDA_VERSION = "6.3.0"; // Version JDA tối thiểu DianxinCore hỗ trợ
+    private static final String REQUIRED_JDA_VERSION = "6.3.1"; // Version JDA tối thiểu DianxinCore hỗ trợ
     private static final int REQUIRED_JAVA_VERSION = 21;
 
     private VersionController() {

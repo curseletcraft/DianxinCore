@@ -32,7 +32,7 @@ Với maven:
   <dependency>
     <groupId>net.dv8tion</groupId>
     <artifactId>JDA</artifactId>
-    <version>6.3.0</version>
+    <version>6.3.1</version>
   </dependency>
 ```
 ```xml
@@ -46,10 +46,15 @@ Với gradle:
 ```groovy
 dependencies {
     implementation 'com.github.CurseletCraft:DianxinCore:2.0.0'
+    
+    // optional
+    // bỏ đi nếu bạn muốn sử dụng phiên bản JDA có sẵn trong DianxinCore
+    implementation("net.dv8tion:JDA:6.3.1")  
 }
 
 repositories {
     maven { url 'https://jitpack.io' }
+    mavenCentral() // import maven central cho JDA
 }
 ```
 
