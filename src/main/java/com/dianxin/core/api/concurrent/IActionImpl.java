@@ -9,12 +9,12 @@ import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class IActionImpl<T> implements IAction<T> {
+class IActionImpl<T> implements IAction<T> {
 
     private final CompletableFuture<T> future;
     private final Logger logger = LoggerFactory.getLogger(IActionImpl.class);
 
-    public IActionImpl(CompletableFuture<T> future) {
+    IActionImpl(CompletableFuture<T> future) {
         this.future = future;
     }
 

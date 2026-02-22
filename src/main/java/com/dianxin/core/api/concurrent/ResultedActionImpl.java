@@ -8,12 +8,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class ResultedActionImpl<T> implements ResultedAction<T> {
+class ResultedActionImpl<T> implements ResultedAction<T> {
 
     // Future bây giờ ôm trọn ActionResult, không lo bị ngắt quãng bởi Exception
     private final CompletableFuture<ActionResult<T>> future;
 
-    public ResultedActionImpl(CompletableFuture<ActionResult<T>> future) {
+    ResultedActionImpl(CompletableFuture<ActionResult<T>> future) {
         // Fallback an toàn: lỡ Future gốc bị lỗi do thread pool từ chối (RejectedExecutionException)
         this.future = future.exceptionally(ActionResult::failure);
     }
