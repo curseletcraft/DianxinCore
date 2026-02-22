@@ -12,7 +12,7 @@ import java.io.File;
 
 @NullMarked
 @SuppressWarnings("unused")
-@ApiStatus.AvailableSince("2.0")
+@ApiStatus.AvailableSince("2.3")
 public class CommandBuilder {
     public static CommandData of(File file) {
         return null;
