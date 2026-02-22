@@ -78,4 +78,19 @@ public class ResultedActionImpl<T> implements ResultedAction<T> {
     public @NotNull ResultedAction<T> onExecutor(@NotNull Executor executor) {
         return new ResultedActionImpl<>(future.thenApplyAsync(Function.identity(), executor));
     }
+
+    @Override
+    public boolean cancel(boolean mayInterruptIfRunning) {
+        return future.cancel(mayInterruptIfRunning);
+    }
+
+    @Override
+    public boolean isDone() {
+        return future.isDone();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return future.isCancelled();
+    }
 }
