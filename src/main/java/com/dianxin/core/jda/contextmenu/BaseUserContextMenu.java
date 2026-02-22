@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // TODO
-@ApiStatus.AvailableSince("1.2")
+@ApiStatus.AvailableSince("2.3")
 public abstract class BaseUserContextMenu {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
