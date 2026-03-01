@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -66,6 +68,32 @@ public abstract class LegacyBaseCommand {
         this.permissionsRequired = permissionsRequired;
         this.selfPermissionsRequired = selfPermissionsRequired;
         this.isDebug = isDebug;
+    }
+
+    /**
+     * Khởi tạo cấu hình lệnh thông qua Builder (Sử dụng ToriServices mặc định)
+     */
+    public LegacyBaseCommand(LegacyCommandBuilder builder) {
+        this(ToriServices.getJda(), ToriServices.getBotMeta(), builder);
+    }
+
+    /**
+     * Khởi tạo cấu hình lệnh thông qua Builder với JDA và BotMeta thủ công
+     */
+    public LegacyBaseCommand(JDA jda, BotMeta meta, LegacyCommandBuilder builder) {
+        this.logger = LoggerFactory.getLogger(this.getClass());
+        this.jda = jda;
+        this.botMeta = meta;
+
+        // Trích xuất cấu hình từ Builder
+        this.isDefer = builder.isDefer();
+        this.guildOnly = builder.isGuildOnly();
+        this.ownerOnly = builder.isOwnerOnly();
+        this.privateChannelOnly = builder.isPrivateChannelOnly();
+        this.directMessageOnly = builder.isDirectMessageOnly();
+        this.permissionsRequired = builder.getPermissionsRequired();
+        this.selfPermissionsRequired = builder.getSelfPermissionsRequired();
+        this.isDebug = builder.isDebug();
     }
 
     /**
@@ -203,4 +231,71 @@ public abstract class LegacyBaseCommand {
 
     // abstract func
     protected abstract void execute(SlashCommandInteractionEvent event);
+
+    /**
+     * Lớp hỗ trợ xây dựng cấu hình cho LegacyBaseCommand.
+     * Giúp code gọn gàng và dễ đọc hơn khi khởi tạo lệnh.
+     */
+    public static class LegacyCommandBuilder {
+        private boolean isDefer = false;
+        private boolean guildOnly = false;
+        private boolean ownerOnly = false;
+        private boolean privateChannelOnly = false;
+        private boolean directMessageOnly = false;
+        private boolean isDebug = false;
+        private final List<Permission> permissionsRequired = new ArrayList<>();
+        private final List<Permission> selfPermissionsRequired = new ArrayList<>();
+
+        // Các hàm Setter mang phong cách Fluent Interface (Return this)
+
+        public LegacyCommandBuilder setDefer(boolean defer) {
+            this.isDefer = defer;
+            return this;
+        }
+
+        public LegacyCommandBuilder setGuildOnly(boolean guildOnly) {
+            this.guildOnly = guildOnly;
+            return this;
+        }
+
+        public LegacyCommandBuilder setOwnerOnly(boolean ownerOnly) {
+            this.ownerOnly = ownerOnly;
+            return this;
+        }
+
+        public LegacyCommandBuilder setPrivateChannelOnly(boolean privateChannelOnly) {
+            this.privateChannelOnly = privateChannelOnly;
+            return this;
+        }
+
+        public LegacyCommandBuilder setDirectMessageOnly(boolean directMessageOnly) {
+            this.directMessageOnly = directMessageOnly;
+            return this;
+        }
+
+        public LegacyCommandBuilder setDebug(boolean debug) {
+            this.isDebug = debug;
+            return this;
+        }
+
+        public LegacyCommandBuilder addRequiredPermissions(Permission... permissions) {
+            this.permissionsRequired.addAll(Arrays.asList(permissions));
+            return this;
+        }
+
+        public LegacyCommandBuilder addSelfPermissions(Permission... permissions) {
+            this.selfPermissionsRequired.addAll(Arrays.asList(permissions));
+            return this;
+        }
+
+        // Các hàm Getter để BaseCommand đọc cấu hình
+        public boolean isDefer() { return isDefer; }
+        public boolean isGuildOnly() { return guildOnly; }
+        public boolean isOwnerOnly() { return ownerOnly; }
+        public boolean isPrivateChannelOnly() { return privateChannelOnly; }
+        public boolean isDirectMessageOnly() { return directMessageOnly; }
+        public boolean isDebug() { return isDebug; }
+        public List<Permission> getPermissionsRequired() { return permissionsRequired; }
+        public List<Permission> getSelfPermissionsRequired() { return selfPermissionsRequired; }
+    }
 }
