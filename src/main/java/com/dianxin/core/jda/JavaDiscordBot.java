@@ -1,8 +1,9 @@
 package com.dianxin.core.jda;
 
+import com.dianxin.core.api.lifecycle.ExecutorManager;
 import com.dianxin.core.jda.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.exceptions.ServiceUnavailableException;
-import com.dianxin.core.jda.handler.console.ConsoleCommandManager;
+import com.dianxin.core.api.console.commands.ConsoleCommandManager;
 import com.dianxin.core.jda.handler.console.example.StopConsoleCommand;
 import com.dianxin.core.jda.meta.BotMeta;
 import com.dianxin.core.jda.utils.services.ToriServices;
@@ -111,7 +112,6 @@ public abstract class JavaDiscordBot {
      */
     public JavaDiscordBot(String token, @NotNull BotMeta meta) {
         if (instance != null) {
-            // Chặn việc tạo 2 con bot cùng lúc (Singleton)
             throw new IllegalStateException("Không thể khởi tạo 2 instance của JavaDiscordBot!");
         }
         instance = this;
@@ -226,13 +226,10 @@ public abstract class JavaDiscordBot {
         logger.info("⏹ Đang tắt bot {}...", botName);
         jda.getPresence().setStatus(OnlineStatus.OFFLINE);
 
-        /*
-         * Shutdown các task khác ngoại trừ bot.onShutdown()
-         * Xem {@link ToriServices#shutdown()}
-         */
-        // DianxinCore.getServer().getScheduler().shutdown();
+        ExecutorManager.shutdown(); // PUSH-10032026-01: released the executor manager
 
         jda.shutdown();
+        System.exit(0);
     }
 
     /**
