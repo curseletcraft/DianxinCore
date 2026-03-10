@@ -92,7 +92,6 @@ public final class ToriServices {
         if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
-        // TODO add scheduler shutdown ExecutorManager.shutdown();
         bot.onShutdown();
     }
 
