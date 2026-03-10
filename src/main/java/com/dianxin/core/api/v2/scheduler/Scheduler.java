@@ -1,46 +1,13 @@
-package com.dianxin.core.jda.scheduler;
+package com.dianxin.core.api.v2.scheduler;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * Example usage:
- * <pre><code>
-*     public class ExampleUsage {
-*
-*     private final Scheduler scheduler = new BotScheduler();
-*
-*     public void demo() {
-*         // 1. Chạy ngay lập tức (Sync - nhẹ)
-*         scheduler.runTask(() -> {
-*             System.out.println("Chạy ngay!");
-*         });
-*
-*         // 2. Chạy Async (IO nặng - database, tải file)
-*         scheduler.runTaskAsync(() -> {
-*             System.out.println("Đang tải dữ liệu nặng...");
-*             // Thread.sleep(5000)...
-*         });
-*
-*         // 3. Chạy sau 5 giây (Later)
-*         scheduler.runTaskLater(() -> {
-*             System.out.println("Đã qua 5 giây!");
-*         }, 5, TimeUnit.SECONDS);
-*
-*         // 4. Chạy lặp lại mỗi 1 giây (Timer) - Giống BukkitRunnable
-*         Task timerTask = scheduler.runTaskTimer(() -> {
-*             System.out.println("Đang đếm giờ...");
-*         }, 0, 1, TimeUnit.SECONDS);
-*
-*         // Hủy task sau 10 giây
-*         scheduler.runTaskLater(() -> {
-*             System.out.println("Hủy timer!");
-*             timerTask.cancel(); // Hoặc scheduler.cancelTask(timerTask.getTaskId());
-*         }, 10, TimeUnit.SECONDS);
-*     }
-* }
- * </code></pre>
+ * Trình quản lý tác vụ hẹn giờ hiện đại, tích hợp chặt chẽ với ExecutorManager.
+ * Sử dụng 1 luồng duy nhất làm "Đồng hồ" để đếm ngược, sau đó phân phối
+ * công việc thực tế cho CPU Pool hoặc IO Pool.
  */
-@Deprecated
+@SuppressWarnings("unused")
 public interface Scheduler {
 
     /**

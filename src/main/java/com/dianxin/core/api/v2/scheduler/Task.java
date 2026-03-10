@@ -1,15 +1,14 @@
-package com.dianxin.core.jda.scheduler;
+package com.dianxin.core.api.v2.scheduler;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Deprecated
 public class Task {
     private static final AtomicInteger idCounter = new AtomicInteger(0);
 
     private final int taskId;
-    private final boolean isSync; // Ở đây Sync hiểu là chạy trên ScheduledPool, Async là CachedPool
-    private Future<?> future;     // Giữ reference để cancel
+    private final boolean isSync;
+    private Future<?> future;
 
     public Task(boolean isSync) {
         this.taskId = idCounter.incrementAndGet();
@@ -24,13 +23,15 @@ public class Task {
         return isSync;
     }
 
+    /**
+     * Hủy tác vụ. Nếu tác vụ đang chạy, nó sẽ cố gắng ngắt (interrupt) luồng.
+     */
     public void cancel() {
-        if (future != null && !future.isCancelled()) {
-            future.cancel(true); // true = cho phép interrupt nếu đang chạy
+        if (future != null && !future.isCancelled() && !future.isDone()) {
+            future.cancel(true);
         }
     }
 
-    // Chỉ dùng nội bộ để set future sau khi submit vào pool
     protected void setFuture(Future<?> future) {
         this.future = future;
     }

@@ -1,6 +1,8 @@
 package com.dianxin.core.jda.utils.services;
 
 import com.dianxin.core.api.lifecycle.ExecutorManager;
+import com.dianxin.core.api.v2.scheduler.Scheduler;
+import com.dianxin.core.api.v2.scheduler.SchedulerImpl;
 import com.dianxin.core.jda.JavaDiscordBot;
 import com.dianxin.core.jda.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.exceptions.ServiceUnavailableException;
@@ -20,6 +22,8 @@ public final class ToriServices {
     private static JavaDiscordBot bot;
     private static JDA jda;
 
+    private static Scheduler scheduler;
+
     private ToriServices() {
         throw new UnsupportedOperationException("ToriServices is a bootstrap class");
     }
@@ -37,6 +41,10 @@ public final class ToriServices {
         if(ann == null) return;
 
         if(ann.registerScheduler()) ExecutorManager.initialize(); // khởi tạo executor manager
+
+        if (scheduler == null) {
+            scheduler = new SchedulerImpl(); // khởi tạo scheduler
+        }
 
         initialized = true;
     }
@@ -88,11 +96,27 @@ public final class ToriServices {
         return jda.getInviteUrl(permissions);
     }
 
+    public static Scheduler getScheduler() {
+        if (scheduler == null) {
+            throw new IllegalStateException("ToriServices chưa được khởi tạo!");
+        }
+        return scheduler;
+    }
+
     public static void shutdown() {
         if(!initialized) {
             throw new ServiceUnavailableException("ToriServices is not initialized!");
         }
+
+        if (scheduler != null) {
+            scheduler.shutdown();
+        }
+
+        ExecutorManager.shutdown();
+
         bot.onShutdown();
+
+        initialized = false;
     }
 
     // others
