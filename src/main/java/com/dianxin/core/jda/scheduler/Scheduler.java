@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 * }
  * </code></pre>
  */
+@Deprecated
 public interface Scheduler {
 
     /**

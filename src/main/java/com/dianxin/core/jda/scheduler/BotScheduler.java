@@ -3,6 +3,7 @@ package com.dianxin.core.jda.scheduler;
 import java.util.Map;
 import java.util.concurrent.*;
 
+@Deprecated
 public class BotScheduler implements Scheduler {
 
     // Map lưu trữ các task đang chạy để quản lý cancel theo ID
