@@ -1,7 +1,7 @@
 package com.dianxin.core.jda.handler.console.example;
 
 import com.dianxin.core.jda.JavaDiscordBot;
-import com.dianxin.core.jda.handler.console.AbstractConsoleCommand;
+import com.dianxin.core.api.console.commands.AbstractConsoleCommand;
 
 @SuppressWarnings("unused")
 public class OldStopConsoleCommand extends AbstractConsoleCommand {
