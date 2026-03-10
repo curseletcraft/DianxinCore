@@ -4,7 +4,7 @@ import com.dianxin.core.api.lifecycle.ExecutorManager;
 import com.dianxin.core.jda.annotations.lifecycle.RegisterToriService;
 import com.dianxin.core.api.exceptions.ServiceUnavailableException;
 import com.dianxin.core.api.console.commands.ConsoleCommandManager;
-import com.dianxin.core.jda.handler.console.example.StopConsoleCommand;
+import com.dianxin.core.jda.commands.console.StopConsoleCommand;
 import com.dianxin.core.jda.meta.BotMeta;
 import com.dianxin.core.jda.utils.services.ToriServices;
 import com.dianxin.core.jda.utils.lifecycle.VersionController;

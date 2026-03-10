@@ -1,4 +1,4 @@
-package com.dianxin.core.jda.handler.console.example;
+package com.dianxin.core.jda.commands.console;
 
 import com.dianxin.core.jda.JavaDiscordBot;
 import com.dianxin.core.api.console.commands.AbstractConsoleCommand;
@@ -12,6 +12,5 @@ public class StopConsoleCommand extends AbstractConsoleCommand {
     @Override
     public void execute(String[] args) {
         JavaDiscordBot.getJavaDiscordBot().onShutdown();
-        System.exit(0);
     }
 }
