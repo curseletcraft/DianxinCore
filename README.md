@@ -25,7 +25,7 @@ Với maven:
   <dependency>
     <groupId>com.github.CurseletCraft</groupId>
     <artifactId>DianxinCore</artifactId>
-    <version>2.0.5</version>
+    <version>2.1.0</version>
   </dependency>
         
   <!-- https://mvnrepository.com/artifact/net.dv8tion/JDA -->
@@ -45,7 +45,7 @@ Với maven:
 Với gradle:
 ```groovy
 dependencies {
-    implementation 'com.github.CurseletCraft:DianxinCore:2.0.5'
+    implementation 'com.github.CurseletCraft:DianxinCore:2.1.0'
     
     // optional
     // bỏ đi nếu bạn muốn sử dụng phiên bản JDA có sẵn trong DianxinCore

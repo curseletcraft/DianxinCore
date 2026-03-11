@@ -1,6 +1,7 @@
 package com.dianxin.core.jda.utils.services;
 
 import com.dianxin.core.api.lifecycle.ExecutorManager;
+import com.dianxin.core.api.utils.VersionManager;
 import com.dianxin.core.api.v2.scheduler.Scheduler;
 import com.dianxin.core.api.v2.scheduler.SchedulerImpl;
 import com.dianxin.core.jda.JavaDiscordBot;
@@ -15,7 +16,7 @@ import org.jetbrains.annotations.ApiStatus;
 @SuppressWarnings("unused")
 public final class ToriServices {
     private static final String TORI_SERVICE_API_VERSION = "4";
-    private static final String TORI_SERVICES_VERSION = "2.0.5";
+    private static final String TORI_SERVICES_VERSION = VersionManager.DIANXIN_API_VERSION;
 
     private static boolean initialized = false;
 
