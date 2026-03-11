@@ -1,5 +1,6 @@
 package com.dianxin.core.api.concurrent;
 
+import com.dianxin.core.api.annotations.ReleasedSince;
 import com.dianxin.core.api.lifecycle.ExecutorManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,6 +31,7 @@ import java.util.function.Function;
  *
  * @param <T> Kiểu dữ liệu trả về khi hành động hoàn tất.
  */
+@ReleasedSince("1.2.0-M1")
 @SuppressWarnings("unused")
 public interface IAction<T> {
 
