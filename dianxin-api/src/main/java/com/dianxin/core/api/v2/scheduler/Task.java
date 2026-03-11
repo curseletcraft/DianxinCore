@@ -3,6 +3,7 @@ package com.dianxin.core.api.v2.scheduler;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@SuppressWarnings("unused")
 public class Task {
     private static final AtomicInteger idCounter = new AtomicInteger(0);
 

@@ -16,6 +16,7 @@ import java.time.OffsetDateTime;
  * Class này tập trung vào các thao tác đọc thông tin, format dữ liệu
  * và cung cấp các giá trị an toàn để hiển thị.
  */
+@SuppressWarnings("unused")
 public final class UserUtils {
     @NotNull private static final JDA jda = ToriServices.getJda();
     @NotNull private final JavaDiscordBot bot = ToriServices.getBaseBot();

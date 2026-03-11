@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class EmbeddedPropertiesConfigurationImpl implements EmbeddedPropertiesConfiguration {
 
     private final Properties properties;

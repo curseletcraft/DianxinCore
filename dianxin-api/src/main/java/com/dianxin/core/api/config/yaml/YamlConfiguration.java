@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+@SuppressWarnings({"unused", "ResultOfMethodCallIgnored"})
 public class YamlConfiguration implements FileConfiguration {
 
     private Map<String, Object> rootMap;

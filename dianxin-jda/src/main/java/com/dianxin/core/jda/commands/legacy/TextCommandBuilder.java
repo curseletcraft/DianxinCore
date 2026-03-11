@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Builder cấu hình cho các lệnh Text truyền thống.
  */
+@SuppressWarnings("unused")
 @ApiStatus.Obsolete(since = "Discord Message Content Intent restrictions")
 public class TextCommandBuilder {
     private final String name;
