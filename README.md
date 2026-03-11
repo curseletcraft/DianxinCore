@@ -23,8 +23,14 @@ Bạn cần phải thêm dependency (hoặc tải file jar từ repository trên
 Với maven:
 ```xml
   <dependency>
-    <groupId>com.github.CurseletCraft</groupId>
-    <artifactId>DianxinCore</artifactId>
+    <groupId>com.github.curseletcraft.DianxinCore</groupId>
+    <artifactId>dianxin-api</artifactId>
+    <version>2.1.0</version>
+  </dependency>
+
+  <dependency>
+    <groupId>com.github.curseletcraft.DianxinCore</groupId>
+    <artifactId>dianxin-jda</artifactId>
     <version>2.1.0</version>
   </dependency>
         
@@ -45,9 +51,11 @@ Với maven:
 Với gradle:
 ```groovy
 dependencies {
-    implementation 'com.github.CurseletCraft:DianxinCore:2.1.0'
+    implementation 'com.github.curseletcraft.DianxinCore:dianxin-api:2.1.0'
     
     // optional
+    implementation 'com.github.curseletcraft.DianxinCore:dianxin-jda:2.1.0'
+    
     // bỏ đi nếu bạn muốn sử dụng phiên bản JDA có sẵn trong DianxinCore
     implementation("net.dv8tion:JDA:6.3.1")  
 }
