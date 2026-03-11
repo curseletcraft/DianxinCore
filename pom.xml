@@ -6,8 +6,13 @@
 
     <groupId>com.dianxin.core</groupId>
     <artifactId>DianxinCore</artifactId>
-    <version>2.0.5</version>
-    <packaging>jar</packaging>
+    <version>2.1.0</version>
+    <packaging>pom</packaging> <!-- jar -->
+
+    <modules>
+        <module>dianxin-api</module>
+        <module>dianxin-jda</module>
+    </modules>
 
     <name>DianxinCore</name>
     <url>http://maven.apache.org</url>
@@ -26,22 +31,6 @@
             <scope>test</scope>
         </dependency>
 
-
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-api</artifactId>-->
-<!--            <version>6.0.2</version>--> <!-- bản mới hơn 6.1.0-M1 không ổn định nên dùng bản 6.0.2-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-
-        <!-- Source: https://mvnrepository.com/artifact/net.dv8tion/JDA -->
-        <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>6.3.1</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -49,61 +38,11 @@
             <version>2.0.17</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>2.6</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>26.1.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.10.2</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <!--WARNING: DEPRECATED DEPENDENCY, use "tools.jackson.core > jackson-databind" instead-->
-<!--        <dependency>-->
-<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
-<!--            <artifactId>jackson-databind</artifactId>-->
-<!--            <version>2.20.1</version>-->
-<!--        </dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/tools.jackson.core/jackson-databind -->
-        <dependency>
-            <groupId>tools.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.13.2</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.juneau/juneau-marshall -->
-        <dependency>
-            <groupId>org.apache.juneau</groupId>
-            <artifactId>juneau-marshall</artifactId>
-            <version>9.2.0</version>
-        </dependency>
-
-        <!-- https://central.sonatype.com/artifact/io.github.cdimascio/dotenv-java?smo=true -->
-        <dependency>
-            <groupId>io.github.cdimascio</groupId>
-            <artifactId>dotenv-java</artifactId>
-            <version>3.2.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.jspecify/jspecify -->
