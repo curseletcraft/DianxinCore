@@ -2,6 +2,7 @@ package com.dianxin.core.api.concurrent;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -19,8 +20,72 @@ class ResultedActionImpl<T> implements ResultedAction<T> {
     }
 
     @Override
+    public void queue() {
+        future.thenAccept(result -> {}); // Thực thi mà không làm gì với kết quả trả về
+    }
+
+    @Override
+    public void queue(@NotNull Consumer<T> success, @NotNull Consumer<Throwable> failure) {
+        future.thenAccept(result -> {
+            if (result.isSuccess()) {
+                // Nhánh thành công: Trả thẳng value ra ngoài
+                success.accept(result.getValue());
+            } else {
+                // Nhánh thất bại: Lấy exception. Nếu là do bị hủy (Cancel), tự tạo Exception báo hủy.
+                Throwable ex = result.getException();
+                if (ex == null && result.isCancelled()) {
+                    ex = new CancellationException("Tác vụ đã bị hủy chủ động.");
+                }
+                failure.accept(ex);
+            }
+        });
+    }
+
+    @Override
     public void queue(@NotNull Consumer<ActionResult<T>> callback) {
         future.thenAccept(callback);
+    }
+
+    @Override
+    public @NotNull ResultedAction<T> onSuccess(@NotNull Consumer<T> successCallback) {
+        CompletableFuture<ActionResult<T>> successHandledFuture = future.thenApply(result -> {
+            // Chỉ kích hoạt callback nếu tác vụ thực sự thành công
+            if (result.isSuccess()) {
+                try {
+                    successCallback.accept(result.getValue());
+                } catch (Exception ignored) {
+                    // Nuốt lỗi an toàn: Giả sử code trong onSuccess bị lỗi (ví dụ lỗi ghi file log),
+                    // nó sẽ không làm hỏng dữ liệu đang truyền xuống hàm queue() ở cuối chuỗi.
+                }
+            }
+            // Trả lại y nguyên result (dù thành công hay thất bại) để đi tiếp con đường của nó
+            return result;
+        });
+
+        return new ResultedActionImpl<>(successHandledFuture);
+    }
+
+    @Override
+    public @NotNull ResultedAction<T> onError(@NotNull Consumer<Throwable> failureCallback) {
+        CompletableFuture<ActionResult<T>> errorHandledFuture = future.thenApply(result -> {
+            // Nếu có lỗi hoặc bị hủy, kích hoạt callback
+            if (!result.isSuccess()) {
+                Throwable ex = result.getException();
+                if (ex == null && result.isCancelled()) {
+                    ex = new CancellationException("Tác vụ đã bị hủy chủ động.");
+                }
+
+                try {
+                    failureCallback.accept(ex);
+                } catch (Exception ignored) {
+                    // Nuốt lỗi nếu code trong onError tự sinh ra lỗi, để không làm sập chuỗi chính
+                }
+            }
+            // Vẫn phải đẩy result gốc đi tiếp cho các hàm queue() hoặc flatMap() phía sau
+            return result;
+        });
+
+        return new ResultedActionImpl<>(errorHandledFuture);
     }
 
     @Override

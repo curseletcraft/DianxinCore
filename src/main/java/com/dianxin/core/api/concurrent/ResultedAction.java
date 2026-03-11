@@ -1,5 +1,6 @@
 package com.dianxin.core.api.concurrent;
 
+import com.dianxin.core.api.annotations.ReleasedSince;
 import com.dianxin.core.api.lifecycle.ExecutorManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,14 +41,50 @@ import java.util.function.Function;
  *      });
  * }</pre>
  *
+ * <br>
+ * <br>
+ * Một ví dụ khác sử dụng {@link #onSuccess} và {@link #onError}
+ *
+ *<pre>{@code
+ * public void executeSomeApiCall() {
+ *     gdService.downloadLevel(123456)
+ *         // 1. Logic phụ: Ghi log nếu lỗi
+ *         .onError(error -> getLogger().error("Có lỗi khi gọi API tải level", error))
+ *
+ *         // 2. Logic phụ: Lưu cache hoặc in ra console nếu thành công
+ *         .onSuccess(levelData -> getLogger().info("Đã tải xong level: " + levelData.level().name()))
+ *
+ *         // 3. Logic chính: Xử lý hiển thị ra Discord cho người dùng xem
+ *         .queue(
+ *             levelData -> event.getHook().sendMessage("Tải thành công!").queue(),
+ *             error -> event.getHook().sendMessage("Tải thất bại! Xin thử lại sau.").queue()
+ *         );
+ * }
+ * }</pre>
  * @param <T> Kiểu dữ liệu trả về khi hành động hoàn tất thành công.
  */
+@ReleasedSince("2.0")
 @SuppressWarnings("unused")
 public interface ResultedAction<T> {
 
     // =========================================================================
     // Execution Methods (Phương thức Thực thi)
     // =========================================================================
+
+    /**
+     * Thực thi action bất đồng bộ mà không cần quan tâm đến kết quả trả về.
+     * (Fire and forget)
+     */
+    void queue();
+
+    /**
+     * Thực thi action và phân nhánh rõ ràng 2 trường hợp: Thành công và Thất bại.
+     * Giúp code gọn hơn khi không cần phải if/else cái ActionResult.
+     *
+     * @param success Hàm xử lý khi action thành công và có dữ liệu.
+     * @param failure Hàm xử lý khi action gặp lỗi hoặc bị hủy.
+     */
+    void queue(@NotNull Consumer<T> success, @NotNull Consumer<Throwable> failure);
 
     /**
      * Thực thi action bất đồng bộ và trả về kết quả qua một callback duy nhất.
@@ -59,6 +96,28 @@ public interface ResultedAction<T> {
      * @param callback Hàm xử lý kết quả trả về.
      */
     void queue(@NotNull Consumer<ActionResult<T>> callback);
+
+    /**
+     * Lắng nghe và xử lý riêng trường hợp tác vụ thành công (như một dạng Middleware).
+     * Phương thức này trả về chính ResultedAction hiện tại, cho phép bạn tiếp tục
+     * nối chuỗi (chaining) hoặc gọi .queue() ở phía sau.
+     *
+     * @param successCallback Hàm nhận và xử lý kết quả thành công (Ví dụ: Ghi log, bộ đếm...).
+     * @return ResultedAction mới với bộ xử lý thành công đã được đính kèm.
+     */
+    @NotNull
+    ResultedAction<T> onSuccess(@NotNull Consumer<T> successCallback);
+
+    /**
+     * Lắng nghe và xử lý riêng trường hợp tác vụ gặp lỗi (như một dạng Middleware).
+     * Phương thức này trả về chính ResultedAction hiện tại, cho phép bạn tiếp tục
+     * nối chuỗi (chaining) hoặc gọi .queue() ở phía sau.
+     *
+     * @param failureCallback Hàm nhận và xử lý lỗi (Log lỗi, gửi tin báo lỗi...).
+     * @return ResultedAction mới với bộ xử lý lỗi đã được đính kèm.
+     */
+    @NotNull
+    ResultedAction<T> onError(@NotNull Consumer<Throwable> failureCallback);
 
     /**
      * Chặn (Block) luồng hiện tại cho đến khi action hoàn tất và trả về {@link ActionResult}.
