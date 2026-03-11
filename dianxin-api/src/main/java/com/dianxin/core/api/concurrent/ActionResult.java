@@ -11,6 +11,7 @@ import java.util.concurrent.CancellationException;
  *
  * @param <T> Kiểu dữ liệu chứa bên trong (chỉ có nghĩa nếu trạng thái là SUCCESS).
  */
+@SuppressWarnings("unused")
 public class ActionResult<T> {
     @NotNull
     private final ActionStatus status;
