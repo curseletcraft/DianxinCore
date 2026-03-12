@@ -12,6 +12,7 @@
     <modules>
         <module>dianxin-api</module>
         <module>dianxin-jda</module>
+        <module>dianxin-jda-expansion-lavaplayer</module>
     </modules>
 
     <name>DianxinCore</name>
