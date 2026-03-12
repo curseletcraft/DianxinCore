@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Trạm trộn âm thanh (Audio Mixer) cho phép phát nhiều luồng AudioPlayer cùng một lúc.
  * Hệ thống tự động trộn (mix) các byte âm thanh lại với nhau trước khi gửi cho Discord.
  */
+@SuppressWarnings("unused")
 public class AudioMixerSendHandler implements AudioSendHandler {
 
     // Danh sách các luồng phát đang hoạt động (Ví dụ: "MUSIC" -> MusicPlayer, "TTS" -> TTSPlayer)

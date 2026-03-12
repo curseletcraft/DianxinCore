@@ -34,7 +34,7 @@ import com.dianxin.core.api.exceptions.UtilityClassInitializationException;
  */
 @SuppressWarnings("unused")
 public final class VersionManager {
-    public static final String DIANXIN_API_VERSION = "2.1.0";
+    public static final String DIANXIN_API_VERSION = "2.1.1";
 
     private VersionManager() {
         throw new UtilityClassInitializationException(VersionManager.class);
