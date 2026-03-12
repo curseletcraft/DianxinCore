@@ -112,6 +112,28 @@ class LazyActionImpl<T> implements LazyAction<T> {
     }
 
     @Override
+    public @NotNull LazyAction<T> recover(@NotNull Function<Throwable, T> fallback) {
+        return new LazyActionImpl<>(() -> actionFactory.get().thenApply(result -> {
+            // Nếu có lỗi (hoặc bị hủy)
+            if (!result.isSuccess()) {
+                try {
+                    // Lấy lỗi ra (nếu là null do bị cancel thì tự tạo lỗi Cancel)
+                    Throwable ex = result.getException() != null ? result.getException()
+                            : new CancellationException("Bị hủy");
+
+                    // Chạy hàm dự phòng và biến kết quả thành SUCCESS trở lại!
+                    return ActionResult.success(fallback.apply(ex));
+                } catch (Throwable t) {
+                    // Nếu chính hàm dự phòng cũng bị lỗi thì đành chịu, trả về lỗi mới
+                    return ActionResult.failure(t);
+                }
+            }
+            // Nếu vốn dĩ đã thành công thì giữ nguyên đi tiếp
+            return result;
+        }));
+    }
+
+    @Override
     public @NotNull LazyAction<T> onSuccess(@NotNull Consumer<T> successCallback) {
         return new LazyActionImpl<>(() -> actionFactory.get().thenApply(result -> {
             if (result.isSuccess()) {

@@ -95,6 +95,15 @@ public interface LazyAction<T> {
     @NotNull
     LazyAction<T> onExecutor(@NotNull Executor executor);
 
+    /**
+     * Bắt lỗi và cung cấp một giá trị dự phòng (Fallback).
+     * Biến trạng thái THẤT BẠI trở lại thành THÀNH CÔNG.
+     *
+     * @param fallback Hàm nhận vào lỗi và trả về kết quả dự phòng.
+     */
+    @NotNull
+    LazyAction<T> recover(@NotNull Function<Throwable, T> fallback);
+
     // =========================================================================
     // Process Management (Quản lý Tiến trình)
     // =========================================================================
