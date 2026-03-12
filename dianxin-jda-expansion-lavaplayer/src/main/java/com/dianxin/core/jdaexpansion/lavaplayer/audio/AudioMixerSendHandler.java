@@ -1,5 +1,6 @@
 package com.dianxin.core.jdaexpansion.lavaplayer.audio;
 
+import com.dianxin.core.api.annotations.ReleasedSince;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
@@ -12,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Trạm trộn âm thanh (Audio Mixer) cho phép phát nhiều luồng AudioPlayer cùng một lúc.
  * Hệ thống tự động trộn (mix) các byte âm thanh lại với nhau trước khi gửi cho Discord.
  */
+@ReleasedSince("2.1.1")
 @SuppressWarnings("unused")
 public class AudioMixerSendHandler implements AudioSendHandler {
 
