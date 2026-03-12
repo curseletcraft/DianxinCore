@@ -22,39 +22,46 @@ Bạn cần phải thêm dependency (hoặc tải file jar từ repository trên
 
 Với maven:
 ```xml
-  <dependency>
-    <groupId>com.github.curseletcraft.DianxinCore</groupId>
-    <artifactId>dianxin-api</artifactId>
-    <version>2.1.0</version>
-  </dependency>
+    <dependency>
+        <groupId>com.github.curseletcraft.DianxinCore</groupId>
+        <artifactId>dianxin-api</artifactId>
+        <version>2.1.1</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.github.curseletcraft.DianxinCore</groupId>
+        <artifactId>dianxin-jda</artifactId>
+        <version>2.1.1</version>
+    </dependency>
 
-  <dependency>
-    <groupId>com.github.curseletcraft.DianxinCore</groupId>
-    <artifactId>dianxin-jda</artifactId>
-    <version>2.1.0</version>
-  </dependency>
+    <dependency>
+        <groupId>com.github.curseletcraft.DianxinCore</groupId>
+        <artifactId>dianxin-jda-expansion-lavaplayer</artifactId>
+        <version>2.1.1</version>
+    </dependency>
         
-  <!-- https://mvnrepository.com/artifact/net.dv8tion/JDA -->
-  <dependency>
-    <groupId>net.dv8tion</groupId>
-    <artifactId>JDA</artifactId>
-    <version>6.3.1</version>
-  </dependency>
+    <!-- https://mvnrepository.com/artifact/net.dv8tion/JDA -->
+        <dependency>
+        <groupId>net.dv8tion</groupId>
+        <artifactId>JDA</artifactId>
+        <version>6.3.1</version>
+    </dependency>
 ```
 ```xml
-  <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-  </repository>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
 ```
 
 Với gradle:
 ```groovy
 dependencies {
-    implementation 'com.github.curseletcraft.DianxinCore:dianxin-api:2.1.0'
+    implementation 'com.github.curseletcraft.DianxinCore:dianxin-api:2.1.1'
     
     // optional
-    implementation 'com.github.curseletcraft.DianxinCore:dianxin-jda:2.1.0'
+    implementation 'com.github.curseletcraft.DianxinCore:dianxin-jda:2.1.1'
+    implementation 'com.github.curseletcraft.DianxinCore:dianxin-jda-expansion-lavaplayer:2.1.1'
     
     // bỏ đi nếu bạn muốn sử dụng phiên bản JDA có sẵn trong DianxinCore
     implementation("net.dv8tion:JDA:6.3.1")  
